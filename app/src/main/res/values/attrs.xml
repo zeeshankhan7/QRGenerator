@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="TextAppearanceAppTitle" format="reference" />
+    <attr name="AddAgendaTextAppearance" format="reference" />
+    <attr name="custom_font" format="enum">
+        <enum name="signika_bold" value="0" />
+        <enum name="signika_light" value="1" />
+        <enum name="signika_regular" value="2" />
+        <enum name="signika_semi_bold" value="3" />
+
+    </attr>
+
+    <declare-styleable name="CustomFontTextView">
+        <attr name="custom_font" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontCheckBox">
+        <attr name="custom_font" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontButton">
+        <attr name="custom_font" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontTextInputLayout">
+        <attr name="custom_font" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontEditText">
+        <attr name="custom_font" />
+    </declare-styleable>
+
+    <declare-styleable name="MaxValueEditText">
+        <attr name="custom_font" />
+        <attr name="maxValue" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontUnderlineTextView">
+        <attr name="custom_font" />
+        <attr name="underlineColor" format="color" />
+        <attr name="underlinePadding" format="dimension" />
+        <attr name="underlineWidth" format="dimension" />
+        <attr name="touchColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="AutoScrollViewPager">
+        <attr name="point_layout" format="string"></attr>
+    </declare-styleable>
+</resources>

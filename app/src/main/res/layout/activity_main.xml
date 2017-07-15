@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/activity_main1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <ImageView
+            android:id="@+id/max_logo"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/description_zoom_touch_close"
+            android:src="@drawable/max_logo" />
+
+        <android.support.v7.widget.CardView
+            style="@style/LoginFormCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/max_logo">
+
+            <LinearLayout
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_bg"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin">
+
+                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:custom_font="signika_regular"
+                    app:hintEnabled="true">
+
+                    <com.qrgeneratorapp.custom.CustomFontEditText
+                        android:id="@+id/visitor_or_atendnt_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:ems="10"
+                        android:hint="Attendant or Visitor Name"
+                        android:inputType="textPersonName"
+                        android:typeface="serif" />
+                </com.qrgeneratorapp.custom.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:custom_font="signika_regular"
+                    app:hintEnabled="true">
+                <com.qrgeneratorapp.custom.CustomFontEditText
+                    android:id="@+id/mobile_no_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/patient_id_editText"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="Mobile No."
+                    android:inputType="phone"
+                    android:typeface="serif" />
+</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:custom_font="signika_regular"
+                    app:hintEnabled="true">
+                <com.qrgeneratorapp.custom.CustomFontEditText
+                    android:id="@+id/patient_name_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/visitor_or_atendnt_editText"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="Patient Name"
+                    android:inputType="textPersonName"
+                    android:typeface="serif" />
+</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:custom_font="signika_regular"
+                    app:hintEnabled="true">
+                <com.qrgeneratorapp.custom.CustomFontEditText
+                    android:id="@+id/patient_id_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/patient_name_editText"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="Patient-ID"
+                    android:inputType="textPersonName"
+                    android:typeface="serif" />
+</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.custom.CustomFontButton
+                    android:id="@+id/loginBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/mobile_no_editText"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:background="@drawable/login_btn_bg"
+                    android:fontFamily="sans-serif"
+                    android:text="Login"
+                    android:textColor="#FFFFFF" />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ProgressBar
+             style="?android:progressBarStyleLarge"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:visibility="gone"
+             android:id="@+id/qrcode_progressbar"
+             android:layout_centerInParent="true"/>
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:visibility="gone"
+             android:text=" Generating QR code... "
+             android:maxLines="1"
+             android:id="@+id/qrcodeProgress_textView"
+             android:layout_below="@+id/qrcode_progressbar"
+             android:layout_centerInParent="true"/>
+     </RelativeLayout>
+
+     <ImageView
+         android:id="@+id/qrCode_image"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:visibility="gone"
+         android:contentDescription="@string/description_zoom_touch_close" />-->
+</android.support.design.widget.CoordinatorLayout>
