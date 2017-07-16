@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.qrgeneratorapp.fragments.HospitalGuideFragment;
 import com.qrgeneratorapp.fragments.InstructionFragment;
 import com.qrgeneratorapp.fragments.QRCodeFragment;
+import com.qrgeneratorapp.fragments.VisitorListFragment;
 import com.qrgeneratorapp.models.HospitalUser;
 import com.qrgeneratorapp.utils.OnTaskCompleted;
 
@@ -51,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
         adapter.addFragment(new InstructionFragment(), "Instructions");
         adapter.addFragment(new HospitalGuideFragment(), "HospitalGuide");
         adapter.addFragment(qrCodeFragment, "QR Code");
-
+        adapter.addFragment(new VisitorListFragment(), "Visitor List");
         viewPager.setAdapter(adapter);
     }
 
