@@ -3,4 +3,5 @@
     <string name="description_zoom_touch_close">zoomed_image</string>
     <string name="one">Instructions coming soon...</string>
     <string name="two">Hospital Guide coming soon...</string>
+    <string name="no_items">No Items</string>
 </resources>
