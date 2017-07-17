@@ -39,13 +39,13 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_horizontal_margin">
 
-                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                <com.qrgeneratorapp.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
 
-                    <com.qrgeneratorapp.custom.CustomFontEditText
+                    <com.qrgeneratorapp.customviews.CustomFontEditText
                         android:id="@+id/visitor_or_atendnt_editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -55,13 +55,13 @@
                         android:hint="Attendant or Visitor Name"
                         android:inputType="textPersonName"
                         android:typeface="serif" />
-                </com.qrgeneratorapp.custom.CustomFontTextInputLayout>
-                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+                </com.qrgeneratorapp.customviews.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
-                <com.qrgeneratorapp.custom.CustomFontEditText
+                <com.qrgeneratorapp.customviews.CustomFontEditText
                     android:id="@+id/mobile_no_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,13 +73,13 @@
                     android:hint="Mobile No."
                     android:inputType="phone"
                     android:typeface="serif" />
-</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
-                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+</com.qrgeneratorapp.customviews.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
-                <com.qrgeneratorapp.custom.CustomFontEditText
+                <com.qrgeneratorapp.customviews.CustomFontEditText
                     android:id="@+id/patient_name_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,13 +91,13 @@
                     android:hint="Patient Name"
                     android:inputType="textPersonName"
                     android:typeface="serif" />
-</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
-                <com.qrgeneratorapp.custom.CustomFontTextInputLayout
+</com.qrgeneratorapp.customviews.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
-                <com.qrgeneratorapp.custom.CustomFontEditText
+                <com.qrgeneratorapp.customviews.CustomFontEditText
                     android:id="@+id/patient_id_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,8 +109,8 @@
                     android:hint="Patient-ID"
                     android:inputType="textPersonName"
                     android:typeface="serif" />
-</com.qrgeneratorapp.custom.CustomFontTextInputLayout>
-                <com.qrgeneratorapp.custom.CustomFontButton
+</com.qrgeneratorapp.customviews.CustomFontTextInputLayout>
+                <com.qrgeneratorapp.customviews.CustomFontButton
                     android:id="@+id/loginBtn"
                     android:layout_width="100dp"
                     android:layout_height="40dp"

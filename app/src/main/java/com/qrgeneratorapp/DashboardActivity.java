@@ -17,6 +17,7 @@ import com.qrgeneratorapp.fragments.InstructionFragment;
 import com.qrgeneratorapp.fragments.QRCodeFragment;
 import com.qrgeneratorapp.fragments.VisitorListFragment;
 import com.qrgeneratorapp.models.HospitalUser;
+import com.qrgeneratorapp.utils.Constants;
 import com.qrgeneratorapp.utils.OnTaskCompleted;
 
 import java.util.ArrayList;
@@ -28,12 +29,6 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private QRCodeFragment qrCodeFragment;
-    private int[] tabIcons = {
-            R.mipmap.ic_instruction,
-            R.mipmap.ic_guide,
-            R.mipmap.ic_qr_code,
-            R.mipmap.ic_visitor
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +44,10 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
         setupTabIcons();
     }
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(0).setIcon(Constants.tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(Constants.tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[2]);
+        tabLayout.getTabAt(3).setIcon(Constants.tabIcons[3]);
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -62,10 +57,10 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
         // set Fragmentclass Arguments
         qrCodeFragment = new QRCodeFragment();
         qrCodeFragment.setArguments(bundle);
-        adapter.addFragment(new InstructionFragment(), "Instructions");
-        adapter.addFragment(new HospitalGuideFragment(), "Guide");
-        adapter.addFragment(qrCodeFragment, "QR Code");
-        adapter.addFragment(new VisitorListFragment(), "Visitor");
+        adapter.addFragment(new InstructionFragment(), Constants.INSTRUCTION_TAB);
+        adapter.addFragment(new HospitalGuideFragment(), Constants.GUIDE_TAB);
+        adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
+        adapter.addFragment(new VisitorListFragment(), Constants.VISITOR_TAB);
         viewPager.setAdapter(adapter);
     }
 

@@ -8,12 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.qrgeneratorapp.R;
-import com.qrgeneratorapp.custom.CustomFontButton;
+import com.qrgeneratorapp.customviews.CustomFontButton;
 import com.qrgeneratorapp.models.HospitalUser;
 import com.qrgeneratorapp.utils.OnTaskCompleted;
 import com.qrgeneratorapp.utils.QRCodeGeneratorTask;
@@ -71,7 +70,7 @@ public class QRCodeFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_two, container, false);
+        View view= inflater.inflate(R.layout.fragment_qrcode, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
