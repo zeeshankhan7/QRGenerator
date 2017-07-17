@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QRGeneratorApp.iml" filepath="$PROJECT_DIR$/QRGeneratorApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QRGeneratorFromGit.iml" filepath="$PROJECT_DIR$/QRGeneratorFromGit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

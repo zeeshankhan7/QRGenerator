@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.custom;
+package com.qrgeneratorapp.customviews;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

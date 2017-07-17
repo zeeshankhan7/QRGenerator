@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.custom;
+package com.qrgeneratorapp.customviews;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;

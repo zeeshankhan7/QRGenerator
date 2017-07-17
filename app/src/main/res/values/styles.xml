@@ -21,10 +21,15 @@
     <style name="LoginFormCardStyle">
         <item name="cardBackgroundColor">@android:color/white</item>
         <item name="cardElevation">@dimen/form_card_elevation</item>
-        <item name="android:layout_margin">@dimen/form_container_padding</item>
     </style>
     <style name="AppButtonStyle" parent="@style/ThemeOverlay.AppCompat">
         <item name="android:textColor">#ffffff</item>
         <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
+    <style name="CardViewStyle" parent="CardView">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/colorAccent</item>
+        <item name="android:padding">16dp</item>
     </style>
 </resources>
