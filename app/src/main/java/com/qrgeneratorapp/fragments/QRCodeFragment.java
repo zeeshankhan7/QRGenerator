@@ -27,6 +27,8 @@ import butterknife.Unbinder;
  */
 
 public class QRCodeFragment  extends Fragment {
+
+    private static final String LOG_TAG= QRCodeFragment.class.getSimpleName();
     private Unbinder unbinder;
     OnTaskCompleted mCallback;
 
@@ -42,7 +44,7 @@ public class QRCodeFragment  extends Fragment {
     @OnClick(R.id.qrCodebutton)
     void buttonClick() {
         HospitalUser hospitalUser = (HospitalUser) getArguments().getSerializable("HospitalUser");
-        Log.d("Irshad" , "HOspital user" + hospitalUser.toString());
+        Log.d(LOG_TAG , "HOspital user" + hospitalUser.toString());
         qrCodeProgressBar.setVisibility(View.VISIBLE);
         qrGeneratorBtn.setVisibility(View.GONE);
         new QRCodeGeneratorTask(getActivity(),mCallback).execute(hospitalUser);
@@ -87,5 +89,39 @@ public class QRCodeFragment  extends Fragment {
         qrCodeImageView.setAlpha(1f);
         qrCodeImageView.setVisibility(View.VISIBLE);
         qrCodeImageView.setImageBitmap(mQrCodeBitmap);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG ," inside "+ LOG_TAG + " onStart");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG ," inside "+ LOG_TAG + " onResume ");
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG ," inside "+ LOG_TAG + " onPause ");
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG ," inside "+ LOG_TAG + " onStop ");
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }
