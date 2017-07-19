@@ -64,7 +64,7 @@ public class CustomDialogFragment extends DialogFragment {
             mCallback.passData(visitor);
             getDialog().dismiss();
         }else{
-            CommonUtility.showSnackBar(container, Constants.REQUEST_MESSAGE);
+            CommonUtility.showSnackBar(container, Constants.REQUEST_MESSAGE);;
         }
 
     }
