@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.fragments;
+package com.qrgenerator.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qrgeneratorapp.R;
+import com.qrgeneratorapp.max.R;
 
 /**
  * Created by inmkhan021 on 7/13/2017.

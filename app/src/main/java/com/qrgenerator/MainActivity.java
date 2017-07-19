@@ -1,4 +1,4 @@
-package com.qrgeneratorapp;
+package com.qrgenerator;
 
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
-import com.qrgeneratorapp.customviews.CustomFontButton;
-import com.qrgeneratorapp.customviews.CustomFontEditText;
-import com.qrgeneratorapp.models.HospitalUser;
-import com.qrgeneratorapp.utils.CommonUtility;
-import com.qrgeneratorapp.utils.Constants;
+import com.qrgenerator.customviews.CustomFontButton;
+import com.qrgenerator.customviews.CustomFontEditText;
+import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.utils.CommonUtility;
+import com.qrgenerator.utils.Constants;
+import com.qrgeneratorapp.max.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

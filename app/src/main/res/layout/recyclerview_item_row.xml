@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
             >
-            <com.qrgeneratorapp.customviews.CustomFontTextView
+            <com.qrgenerator.customviews.CustomFontTextView
         android:id="@+id/visitor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
         android:text="Visitor Name"/>
-            <com.qrgeneratorapp.customviews.CustomFontTextView
+            <com.qrgenerator.customviews.CustomFontTextView
         android:id="@+id/visitor_address"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          android:layout_below="@id/visitor_name"/>
-            <com.qrgeneratorapp.customviews.CustomFontTextView
+            <com.qrgenerator.customviews.CustomFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"

@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.customviews;
+package com.qrgenerator.customviews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 
-import com.qrgeneratorapp.R;
+import com.qrgeneratorapp.max.R;
 
 import java.util.Hashtable;
 

@@ -1,4 +1,4 @@
-package com.qrgeneratorapp;
+package com.qrgenerator;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

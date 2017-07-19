@@ -1,15 +1,13 @@
-package com.qrgeneratorapp.customviews;
+package com.qrgenerator.customviews;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qrgeneratorapp.R;
-import com.qrgeneratorapp.models.HospitalUser;
-import com.qrgeneratorapp.utils.QRCodeGeneratorTask;
+
+import com.qrgeneratorapp.max.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

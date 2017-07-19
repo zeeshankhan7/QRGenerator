@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.utils;
+package com.qrgenerator.utils;
 
 import android.util.Log;
 

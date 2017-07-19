@@ -1,11 +1,9 @@
-package com.qrgeneratorapp.utils;
+package com.qrgenerator.utils;
 
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
-import com.qrgeneratorapp.models.HospitalUser;
+import com.qrgenerator.models.HospitalUser;
 
 /**
  * Created by inmkhan021 on 7/12/2017.

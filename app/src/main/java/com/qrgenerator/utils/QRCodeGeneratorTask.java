@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.utils;
+package com.qrgenerator.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,8 +8,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.qrgeneratorapp.R;
-import com.qrgeneratorapp.models.HospitalUser;
+import com.qrgeneratorapp.max.R;
+import com.qrgenerator.models.HospitalUser;
 
 /**
  * Created by inmkhan021 on 7/11/2017.

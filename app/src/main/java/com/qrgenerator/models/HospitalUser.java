@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.models;
+package com.qrgenerator.models;
 
 import java.io.Serializable;
 

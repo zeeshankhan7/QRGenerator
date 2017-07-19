@@ -1,4 +1,4 @@
-package com.qrgeneratorapp;
+package com.qrgenerator;
 
 import org.junit.Test;
 

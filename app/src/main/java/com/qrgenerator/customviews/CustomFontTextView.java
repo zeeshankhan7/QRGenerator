@@ -1,30 +1,29 @@
-package com.qrgeneratorapp.customviews;
+package com.qrgenerator.customviews;
 
 import android.content.Context;
-import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 /**
  * Created by zeeshan on 7/15/2017.
  */
-public class CustomFontTextInputLayout extends TextInputLayout {
+
+public class CustomFontTextView extends AppCompatTextView {
 
     private static final int DEFAULT_FONT_FACE = TypeFaceHelper.SOURCE_SANS_PRO_REGULAR;
 
-
-    public CustomFontTextInputLayout(Context context) {
+    public CustomFontTextView(Context context) {
         super(context);
         setTypeface(TypeFaceHelper.getTypeFaceFromAttr(context, null, DEFAULT_FONT_FACE));
     }
 
-    public CustomFontTextInputLayout(Context context, AttributeSet attrs) {
+    public CustomFontTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setTypeface(TypeFaceHelper.getTypeFaceFromAttr(context, attrs, DEFAULT_FONT_FACE));
     }
 
-    public CustomFontTextInputLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomFontTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setTypeface(TypeFaceHelper.getTypeFaceFromAttr(context, attrs, DEFAULT_FONT_FACE));
     }
-
 }

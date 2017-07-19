@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.fragments;
+package com.qrgenerator.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.qrgeneratorapp.R;
-import com.qrgeneratorapp.customviews.CustomFontButton;
-import com.qrgeneratorapp.models.HospitalUser;
-import com.qrgeneratorapp.utils.OnTaskCompleted;
-import com.qrgeneratorapp.utils.QRCodeGeneratorTask;
+import com.qrgeneratorapp.max.R;
+import com.qrgenerator.customviews.CustomFontButton;
+import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.utils.OnTaskCompleted;
+import com.qrgenerator.utils.QRCodeGeneratorTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

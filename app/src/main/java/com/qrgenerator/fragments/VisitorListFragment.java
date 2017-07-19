@@ -1,28 +1,21 @@
-package com.qrgeneratorapp.fragments;
+package com.qrgenerator.fragments;
 
 import android.app.Dialog;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.qrgeneratorapp.R;
-import com.qrgeneratorapp.adapter.VisitorAdapter;
-import com.qrgeneratorapp.customviews.CustomDialogFragment;
-import com.qrgeneratorapp.models.Visitor;
+import com.qrgeneratorapp.max.R;
+import com.qrgenerator.adapter.VisitorAdapter;
+import com.qrgenerator.customviews.CustomDialogFragment;
+import com.qrgenerator.models.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;

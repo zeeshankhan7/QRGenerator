@@ -1,4 +1,4 @@
-package com.qrgeneratorapp;
+package com.qrgenerator;
 
 import android.graphics.Bitmap;
 import android.support.design.widget.TabLayout;
@@ -12,13 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.qrgeneratorapp.fragments.HospitalGuideFragment;
-import com.qrgeneratorapp.fragments.InstructionFragment;
-import com.qrgeneratorapp.fragments.QRCodeFragment;
-import com.qrgeneratorapp.fragments.VisitorListFragment;
-import com.qrgeneratorapp.models.HospitalUser;
-import com.qrgeneratorapp.utils.Constants;
-import com.qrgeneratorapp.utils.OnTaskCompleted;
+import com.qrgenerator.fragments.HospitalGuideFragment;
+import com.qrgenerator.fragments.InstructionFragment;
+import com.qrgenerator.fragments.QRCodeFragment;
+import com.qrgenerator.fragments.VisitorListFragment;
+import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.utils.Constants;
+import com.qrgenerator.utils.OnTaskCompleted;
+import com.qrgeneratorapp.max.R;
 
 import java.util.ArrayList;
 import java.util.List;

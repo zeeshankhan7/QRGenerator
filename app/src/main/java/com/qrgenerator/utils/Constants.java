@@ -1,6 +1,6 @@
-package com.qrgeneratorapp.utils;
+package com.qrgenerator.utils;
 
-import com.qrgeneratorapp.R;
+import com.qrgeneratorapp.max.R;
 
 /**
  * Created by inmkhan021 on 7/12/2017.

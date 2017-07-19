@@ -1,4 +1,4 @@
-package com.qrgeneratorapp.models;
+package com.qrgenerator.models;
 
 /**
  * Created by inmkhan021 on 7/17/2017.
