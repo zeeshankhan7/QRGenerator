@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/visitor_form_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <RelativeLayout
         android:id="@+id/activity_main1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,7 +10,7 @@
             style="@style/LoginFormCardStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/max_logo">
+            android:id="@+id/card_view">
 
             <LinearLayout
                 android:id="@+id/activity_main"
@@ -125,6 +120,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
-    </RelativeLayout>
+</RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>

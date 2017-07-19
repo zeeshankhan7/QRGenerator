@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.qrgeneratorapp.DashboardActivity;
 import com.qrgeneratorapp.R;
@@ -41,10 +45,14 @@ public class CustomDialogFragment extends DialogFragment {
     @BindView(R.id.patient_name_editTxt)
     CustomFontEditText patientName;
     private Unbinder unbinder;
+    @BindView(R.id.card_view)
+    CardView cv;
+    @BindView(R.id.activity_main1)
+    RelativeLayout activity_main1;
+    @BindView(R.id.activity_main)
+    LinearLayout  ll;
     @BindView(R.id.cancelBtn)
     CustomFontButton cancelBtn;
-    @BindView(R.id.visitor_form_container)
-    CoordinatorLayout container;
     @BindView(R.id.SubmitBtn)
     CustomFontButton SubmitBtn;
     @OnClick(R.id.cancelBtn)
@@ -64,7 +72,7 @@ public class CustomDialogFragment extends DialogFragment {
             mCallback.passData(visitor);
             getDialog().dismiss();
         }else{
-            CommonUtility.showSnackBar(container, Constants.REQUEST_MESSAGE);;
+            CommonUtility.showSnackBar(activity_main1, Constants.REQUEST_MESSAGE);;
         }
 
     }
@@ -76,6 +84,7 @@ public class CustomDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.visitor_form, container,false);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         unbinder = ButterKnife.bind(this, rootView);
         // Do something else
         return rootView;
