@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qrgeneratorapp.R;
@@ -37,9 +36,18 @@ public class VisitorAdapter extends RecyclerView.Adapter<VisitorAdapter.VisitorV
     public void onBindViewHolder(VisitorViewHolder holder, int position) {
         Visitor visitor= visitorList.get(position);
         holder.visitorName.setText( visitor.getVisitorName());
-        holder.visitorAdrress.setText(visitor.getVisitorAddress());
-        holder.visitorContactNo.setText(visitor.getVisitorContactNo());
+//        holder.visitorAdrress.setText(visitor.getVisitorAddress());
+        holder.visitorContactNo.setText(visitor.getVisitorMobileNo());
 
+    }
+    public void addItem(Visitor dataObj) {
+        visitorList.add(dataObj);
+        notifyDataSetChanged();
+//        notifyItemInserted(index);
+    }
+    public void deleteItem(int index) {
+        visitorList.remove(index);
+        notifyItemRemoved(index);
     }
 
 

@@ -3,12 +3,14 @@ package com.qrgeneratorapp.fragments;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import com.qrgeneratorapp.R;
 import com.qrgeneratorapp.adapter.VisitorAdapter;
 import com.qrgeneratorapp.customviews.CustomDialogFragment;
+import com.qrgeneratorapp.models.HospitalUser;
 import com.qrgeneratorapp.models.Visitor;
 
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ import butterknife.Unbinder;
 
 public class VisitorListFragment extends Fragment {
 
-
+    private static final String LOG_TAG= VisitorListFragment.class.getSimpleName();
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.visitor_form)
@@ -79,27 +82,6 @@ public class VisitorListFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_visitor, container, false);
         unbinder = ButterKnife.bind(this, view);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        allowedVisitorCount=prepareVisitor();
-        if(allowedVisitorCount==1 ){
-            mRecyclerView.setVisibility(View.VISIBLE);
-            allowVisitorBtn.setVisibility(View.VISIBLE);
-            adapter= new VisitorAdapter(getContext(), visitorList);
-            mRecyclerView.setLayoutManager(mLinearLayoutManager);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.setAdapter(adapter);
-        }else if(allowedVisitorCount==0 ){
-            mRecyclerView.setVisibility(View.GONE);
-            allowVisitorBtn.setVisibility(View.VISIBLE);
-        }else if(allowedVisitorCount>1){
-            mRecyclerView.setVisibility(View.VISIBLE);
-            adapter= new VisitorAdapter(getContext(), visitorList);
-            mRecyclerView.setLayoutManager(mLinearLayoutManager);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.setAdapter(adapter);
-        }
-
         return view;
     }
 
@@ -147,4 +129,77 @@ public class VisitorListFragment extends Fragment {
             }
         });
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG ," inside onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG ," inside onResume ");
+        initLayoutComponent();
+    }
+
+    private void initLayoutComponent() {
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        allowedVisitorCount=prepareVisitor();
+        if(allowedVisitorCount==1 ){
+            mRecyclerView.setVisibility(View.VISIBLE);
+            allowVisitorBtn.setVisibility(View.VISIBLE);
+            adapter= new VisitorAdapter(getContext(), visitorList);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(adapter);
+        }else if(allowedVisitorCount==0 ){
+            mRecyclerView.setVisibility(View.GONE);
+            allowVisitorBtn.setVisibility(View.VISIBLE);
+        }else if(allowedVisitorCount>1){
+            mRecyclerView.setVisibility(View.VISIBLE);
+            adapter= new VisitorAdapter(getContext(), visitorList);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(adapter);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(LOG_TAG ," inside  onActivityCreated");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG ," inside  onPause ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG ," inside  onStop ");
+    }
+
+    public void addNewVisitor(Visitor data){
+
+        if(adapter==null){
+            mRecyclerView.setVisibility(View.VISIBLE);
+            visitorList.add(data);
+            adapter= new VisitorAdapter(getContext(), visitorList);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(adapter);
+        }else{
+
+            adapter.addItem(data);
+            if(adapter.getItemCount()==2){
+                allowVisitorBtn.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
 }

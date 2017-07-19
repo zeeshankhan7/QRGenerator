@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/visitor_form_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
         android:id="@+id/activity_main1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,7 +10,7 @@
             style="@style/LoginFormCardStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/max_logo">
+            android:id="@+id/card_view">
 
             <LinearLayout
                 android:id="@+id/activity_main"
@@ -34,7 +29,7 @@
                     app:hintEnabled="true">
 
                     <com.qrgeneratorapp.customviews.CustomFontEditText
-                        android:id="@+id/visitor_or_atendnt_editText"
+                        android:id="@+id/visitor_name_editTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -50,12 +45,12 @@
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
                 <com.qrgeneratorapp.customviews.CustomFontEditText
-                    android:id="@+id/mobile_no_editText"
+                    android:id="@+id/visitor_mobile_no_editTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/patient_id_editText"
+                    android:layout_below="@+id/patient_id_editTxt"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="Mobile No."
@@ -68,12 +63,12 @@
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
                 <com.qrgeneratorapp.customviews.CustomFontEditText
-                    android:id="@+id/patient_name_editText"
+                    android:id="@+id/patient_name_editTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/visitor_or_atendnt_editText"
+                    android:layout_below="@+id/visitor_name_editTxt"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="Patient Name"
@@ -86,12 +81,12 @@
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
                 <com.qrgeneratorapp.customviews.CustomFontEditText
-                    android:id="@+id/patient_id_editText"
+                    android:id="@+id/patient_id_editTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/patient_name_editText"
+                    android:layout_below="@+id/patient_name_editTxt"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="Patient-ID"
@@ -101,7 +96,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:layout_below="@+id/mobile_no_editText"
+                    android:layout_below="@+id/mobile_no_editTxt"
                     android:layout_height="match_parent">
                 <com.qrgeneratorapp.customviews.CustomFontButton
                     android:theme="@style/AppButtonStyle"
@@ -125,6 +120,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
-    </RelativeLayout>
+</RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
