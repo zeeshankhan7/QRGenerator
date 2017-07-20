@@ -77,6 +77,7 @@ public class VisitorListFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_visitor, container, false);
         unbinder = ButterKnife.bind(this, view);
+        initLayoutComponent();
         return view;
     }
 
@@ -134,7 +135,7 @@ public class VisitorListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(LOG_TAG ," inside onResume ");
-        initLayoutComponent();
+
     }
 
     private void initLayoutComponent() {
@@ -179,22 +180,25 @@ public class VisitorListFragment extends Fragment {
     }
 
     public void addNewVisitor(Visitor data){
-
-        if(adapter==null){
-            mRecyclerView.setVisibility(View.VISIBLE);
+       // if(adapter==null){
             visitorList.add(data);
-            adapter= new VisitorAdapter(getContext(), visitorList);
+        mRecyclerView.setVisibility(View.VISIBLE);
+
+        adapter= new VisitorAdapter(getContext(), visitorList);
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(adapter);
-        }else{
-
-            adapter.addItem(data);
-            if(adapter.getItemCount()==2){
+        if(adapter.getItemCount()==2){
                 allowVisitorBtn.setVisibility(View.GONE);
             }
-
-        }
+      //  }
+//        else{
+//            adapter.addItem(data);
+//            if(adapter.getItemCount()==2){
+//                allowVisitorBtn.setVisibility(View.GONE);
+//            }
+//
+//        }
     }
 
 }

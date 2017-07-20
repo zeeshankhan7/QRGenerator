@@ -48,8 +48,6 @@ LinearLayout activityMainContainer;
             finish();
 
         }else{
-            intent.putExtra("HospitalUser", hospitalUser);
-            startActivity(intent);
             CommonUtility.showSnackBar(container, Constants.REQUEST_MESSAGE);
         }
     }
