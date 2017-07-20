@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qrgenerator.models.Visitor;
-import com.qrgeneratorapp.max.R;
 
 import java.util.List;
+
+import p.R;
 
 /**
  * Created by inmkhan021 on 7/17/2017.
@@ -36,9 +37,18 @@ public class VisitorAdapter extends RecyclerView.Adapter<VisitorAdapter.VisitorV
     public void onBindViewHolder(VisitorViewHolder holder, int position) {
         Visitor visitor= visitorList.get(position);
         holder.visitorName.setText( visitor.getVisitorName());
-        holder.visitorAdrress.setText(visitor.getVisitorAddress());
-        holder.visitorContactNo.setText(visitor.getVisitorContactNo());
+//        holder.visitorAdrress.setText(visitor.getVisitorAddress());
+        holder.visitorContactNo.setText(visitor.getVisitorMobileNo());
 
+    }
+    public void addItem(Visitor dataObj) {
+        visitorList.add(dataObj);
+        notifyDataSetChanged();
+//        notifyItemInserted(index);
+    }
+    public void deleteItem(int index) {
+        visitorList.remove(index);
+        notifyItemRemoved(index);
     }
 
 
