@@ -15,7 +15,6 @@ import android.util.StateSet;
 
 import com.qrgeneratorapp.max.R;
 
-
 /**
  * Created by zeeshan on 7/15/2017.
  */

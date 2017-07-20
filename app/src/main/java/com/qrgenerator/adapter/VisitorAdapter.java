@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qrgenerator.models.Visitor;
+import com.qrgeneratorapp.max.R;
 
 import java.util.List;
 
-import p.R;
 
 /**
  * Created by inmkhan021 on 7/17/2017.

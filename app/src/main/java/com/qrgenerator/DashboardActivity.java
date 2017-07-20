@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.qrgenerator.customviews.CustomDialogFragment;
 import com.qrgenerator.fragments.HospitalGuideFragment;
 import com.qrgenerator.fragments.InstructionFragment;
 import com.qrgenerator.fragments.QRCodeFragment;
 import com.qrgenerator.fragments.VisitorListFragment;
 import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.models.Visitor;
 import com.qrgenerator.utils.Constants;
 import com.qrgenerator.utils.OnTaskCompleted;
 import com.qrgeneratorapp.max.R;
@@ -24,12 +26,13 @@ import com.qrgeneratorapp.max.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardActivity extends AppCompatActivity implements OnTaskCompleted {
+public class DashboardActivity extends AppCompatActivity implements OnTaskCompleted ,CustomDialogFragment.DataPassListener  {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private QRCodeFragment qrCodeFragment;
+    private VisitorListFragment mVisitorListFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +60,12 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
         bundle.putSerializable("HospitalUser", hospitalUser);
         // set Fragmentclass Arguments
         qrCodeFragment = new QRCodeFragment();
+        mVisitorListFragment=new VisitorListFragment();
         qrCodeFragment.setArguments(bundle);
         adapter.addFragment(new InstructionFragment(), Constants.INSTRUCTION_TAB);
         adapter.addFragment(new HospitalGuideFragment(), Constants.GUIDE_TAB);
         adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
-        adapter.addFragment(new VisitorListFragment(), Constants.VISITOR_TAB);
+        adapter.addFragment(mVisitorListFragment, Constants.VISITOR_TAB);
         viewPager.setAdapter(adapter);
     }
 
@@ -69,6 +73,11 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
     public void onTaskCompleted(Bitmap bitmap) {
         qrCodeFragment.setQRCodeBitmap(bitmap);
         Log.d("Irshad", " inside onTaskCompleted ");
+    }
+
+    @Override
+    public void passData(Visitor data) {
+        mVisitorListFragment.addNewVisitor(data);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
