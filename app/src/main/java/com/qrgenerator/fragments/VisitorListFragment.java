@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -42,7 +43,7 @@ public class VisitorListFragment extends Fragment {
     @BindView(R.id.visitor_form)
     View v;
     @BindView(R.id.allow_visitor_btn)
-    Button allowVisitorBtn;
+    FloatingActionButton allowVisitorBtn;
 
     @OnClick(R.id.allow_visitor_btn)
     public void buttonClick() {
@@ -144,7 +145,7 @@ public class VisitorListFragment extends Fragment {
         allowedVisitorCount=prepareVisitor();
         if(allowedVisitorCount==1 ){
             mRecyclerView.setVisibility(View.VISIBLE);
-            allowVisitorBtn.setVisibility(View.VISIBLE);
+          //  allowVisitorBtn.setVisibility(View.VISIBLE);
             adapter= new VisitorAdapter(getContext(), visitorList);
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());

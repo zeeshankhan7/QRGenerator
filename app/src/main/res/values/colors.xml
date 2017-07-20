@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2e9f92</color>
-    <color name="colorPrimaryDark">#003974</color>
+    <color name="colorPrimaryDark">#1aa696</color>
     <color name="colorAccent">#f47920</color>
     <color name="QRCodeBlackColor">#000000</color>
     <color name="QRCodeWhiteColor">#ffffff</color>
