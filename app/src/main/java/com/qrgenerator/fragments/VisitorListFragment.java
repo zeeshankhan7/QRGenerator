@@ -21,6 +21,8 @@ import android.widget.Button;
 import com.qrgenerator.adapter.VisitorAdapter;
 import com.qrgenerator.customviews.CustomDialogFragment;
 import com.qrgenerator.models.Visitor;
+import com.qrgeneratorapp.databases.AppDBHelper;
+import com.qrgeneratorapp.databases.ItemTable;
 import com.qrgeneratorapp.max.R;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import butterknife.Unbinder;
 public class VisitorListFragment extends Fragment {
 
     private static final String LOG_TAG= VisitorListFragment.class.getSimpleName();
+    private AppDBHelper appDBHelper;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.visitor_form)
@@ -78,14 +81,18 @@ public class VisitorListFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_visitor, container, false);
         unbinder = ButterKnife.bind(this, view);
+
         initLayoutComponent();
         return view;
     }
 
     private int prepareVisitor() {
-        if(visitorList==null){
-            visitorList= new ArrayList<>();
-        }else visitorList.clear();
+        ItemTable itemTable = new ItemTable(appDBHelper);
+
+        visitorList= itemTable.getAllData();
+//        if(visitorList==null){
+//            visitorList= new ArrayList<>();
+//        }else visitorList.clear();
 
 //        Visitor visitor1= new Visitor("Zeeshan", "Noida", "9873799571", true);
 //        Visitor visitor2= new Visitor("Ram Kumar", "Gurgaon", "8802390096", true);
@@ -140,6 +147,7 @@ public class VisitorListFragment extends Fragment {
     }
 
     private void initLayoutComponent() {
+        appDBHelper= new AppDBHelper(getContext());
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         allowedVisitorCount=prepareVisitor();
@@ -154,6 +162,7 @@ public class VisitorListFragment extends Fragment {
             mRecyclerView.setVisibility(View.GONE);
             allowVisitorBtn.setVisibility(View.VISIBLE);
         }else if(allowedVisitorCount>1){
+            allowVisitorBtn.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
             adapter= new VisitorAdapter(getContext(), visitorList);
             mRecyclerView.setLayoutManager(mLinearLayoutManager);

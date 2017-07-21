@@ -5,7 +5,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
-
 import com.qrgenerator.customviews.CustomFontButton;
 import com.qrgenerator.customviews.CustomFontEditText;
 import com.qrgenerator.models.HospitalUser;
