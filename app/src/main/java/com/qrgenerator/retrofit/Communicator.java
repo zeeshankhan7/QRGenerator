@@ -7,6 +7,7 @@ import com.qrgenerator.Events.ErrorEvent;
 import com.qrgenerator.Events.ServerEvent;
 import com.qrgenerator.models.AddVisitorParams;
 import com.qrgenerator.models.AddVisitorResponse;
+import com.qrgenerator.models.GetVisitorParams;
 import com.qrgenerator.models.Visitor;
 import com.qrgenerator.models.VisitorListResponse;
 import com.qrgenerator.utils.CommonUtility;
@@ -52,7 +53,7 @@ public class Communicator {
         });
     }
 
-    public void getVisitorListFromServer(String patientId){
+    public void getVisitorListFromServer(GetVisitorParams patientId){
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 

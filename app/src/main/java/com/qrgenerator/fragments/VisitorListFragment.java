@@ -25,6 +25,7 @@ import com.qrgenerator.adapter.VisitorAdapter;
 import com.qrgenerator.customviews.CustomDialogFragment;
 import com.qrgenerator.models.AddVisitorParams;
 import com.qrgenerator.models.AddVisitorResponse;
+import com.qrgenerator.models.GetVisitorParams;
 import com.qrgenerator.models.Visitor;
 import com.qrgenerator.models.VisitorListResponse;
 import com.qrgenerator.retrofit.Communicator;
@@ -102,7 +103,7 @@ public class VisitorListFragment extends Fragment {
     }
 
     private int prepareVisitor() {
-        if(!CommonUtility.isNetworkAvailable(getContext())){
+        if(CommonUtility.isNetworkAvailable(getContext())){
             ItemTable itemTable = new ItemTable(appDBHelper);
             visitorList= itemTable.getAllData();
         }else {
@@ -110,7 +111,8 @@ public class VisitorListFragment extends Fragment {
             Communicator communicator = new Communicator();
             AppSharedPreferenceHelper appPref = AppSharedPreferenceHelper.getInstance(getContext());
             String patientID= appPref.getPatientIDFromSP();
-            communicator.getVisitorListFromServer(patientID);
+            GetVisitorParams getVisitorParams= new GetVisitorParams(patientID);
+            communicator.getVisitorListFromServer(getVisitorParams);
         }
 
          return visitorList.size();
@@ -198,17 +200,19 @@ public class VisitorListFragment extends Fragment {
     public void onServerEvent(ServerEvent serverEvent){
         String responseMsg="";
         if(serverEvent.getServerResponse() instanceof VisitorListResponse){
-            if(serverEvent!=null && serverEvent.getServerResponse()!=null ){
-                String status=((VisitorListResponse) serverEvent.getServerResponse()).getStatus();
-                responseMsg=((VisitorListResponse) serverEvent.getServerResponse()).getMessage();
-                // get the visitor list
-            }
+            Log.d(LOG_TAG, " inside onServerEvent ");
+//            if(serverEvent!=null && serverEvent.getServerResponse()!=null ){
+//                String status=((VisitorListResponse) serverEvent.getServerResponse()).getStatus();
+//                responseMsg=((VisitorListResponse) serverEvent.getServerResponse()).getMessage();
+//                // get the visitor list
+//            }
         }
 
     }
 
     @Subscribe
     public void onErrorEvent(ErrorEvent errorEvent){
+        Log.d(LOG_TAG, " inside onErrorEvent ");
         CommonUtility.showSnackBar(rootLayout, errorEvent.getErrorMsg());
     }
 
