@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.qrgeneratorapp.max.R;
 import com.qrgenerator.customviews.CustomFontButton;
-import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.models.Attendant;
 import com.qrgenerator.utils.OnTaskCompleted;
 import com.qrgenerator.utils.QRCodeGeneratorTask;
 
@@ -41,11 +41,11 @@ public class QRCodeFragment  extends Fragment {
     }
     @OnClick(R.id.qrCodebutton)
     void buttonClick() {
-        HospitalUser hospitalUser = (HospitalUser) getArguments().getSerializable("HospitalUser");
-        Log.d("Irshad" , "HOspital user" + hospitalUser.toString());
+        Attendant attendant = (Attendant) getArguments().getSerializable("Attendant");
+        Log.d("Irshad" , "HOspital user" + attendant.toString());
         qrCodeProgressBar.setVisibility(View.VISIBLE);
         qrGeneratorBtn.setVisibility(View.GONE);
-        new QRCodeGeneratorTask(getActivity(),mCallback).execute(hospitalUser);
+        new QRCodeGeneratorTask(getActivity(),mCallback).execute(attendant);
 
     }
     @Override

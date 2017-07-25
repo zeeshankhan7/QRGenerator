@@ -17,8 +17,9 @@ import com.qrgenerator.fragments.HospitalGuideFragment;
 import com.qrgenerator.fragments.InstructionFragment;
 import com.qrgenerator.fragments.QRCodeFragment;
 import com.qrgenerator.fragments.VisitorListFragment;
-import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.Visitor;
+import com.qrgenerator.utils.AppSharedPreferenceHelper;
 import com.qrgenerator.utils.Constants;
 import com.qrgenerator.utils.OnTaskCompleted;
 import com.qrgeneratorapp.max.R;
@@ -31,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private QRCodeFragment qrCodeFragment;
+//    private QRCodeFragment qrCodeFragment;
     private VisitorListFragment mVisitorListFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,28 +51,24 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(Constants.tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(Constants.tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[2]);
-        tabLayout.getTabAt(3).setIcon(Constants.tabIcons[3]);
+//        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[2]);
+        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[3]);
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        HospitalUser hospitalUser=(HospitalUser) getIntent().getSerializableExtra("HospitalUser");
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("HospitalUser", hospitalUser);
         // set Fragmentclass Arguments
-        qrCodeFragment = new QRCodeFragment();
+//        qrCodeFragment = new QRCodeFragment();
         mVisitorListFragment=new VisitorListFragment();
-        qrCodeFragment.setArguments(bundle);
         adapter.addFragment(new InstructionFragment(), Constants.INSTRUCTION_TAB);
         adapter.addFragment(new HospitalGuideFragment(), Constants.GUIDE_TAB);
-        adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
+//        adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
         adapter.addFragment(mVisitorListFragment, Constants.VISITOR_TAB);
         viewPager.setAdapter(adapter);
     }
 
     @Override
     public void onTaskCompleted(Bitmap bitmap) {
-        qrCodeFragment.setQRCodeBitmap(bitmap);
+//        qrCodeFragment.setQRCodeBitmap(bitmap);
         Log.d("Irshad", " inside onTaskCompleted ");
     }
 

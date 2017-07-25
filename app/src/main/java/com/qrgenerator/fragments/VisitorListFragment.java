@@ -17,13 +17,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
+import com.qrgenerator.Events.ErrorEvent;
+import com.qrgenerator.Events.ServerEvent;
 import com.qrgenerator.adapter.VisitorAdapter;
 import com.qrgenerator.customviews.CustomDialogFragment;
+import com.qrgenerator.models.AddVisitorParams;
+import com.qrgenerator.models.AddVisitorResponse;
 import com.qrgenerator.models.Visitor;
+import com.qrgenerator.models.VisitorListResponse;
+import com.qrgenerator.retrofit.Communicator;
+import com.qrgenerator.utils.AppSharedPreferenceHelper;
+import com.qrgenerator.utils.CommonUtility;
+import com.qrgenerator.utils.Constants;
 import com.qrgeneratorapp.databases.AppDBHelper;
 import com.qrgeneratorapp.databases.ItemTable;
 import com.qrgeneratorapp.max.R;
+import com.squareup.otto.Subscribe;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +54,8 @@ public class VisitorListFragment extends Fragment {
 
     private static final String LOG_TAG= VisitorListFragment.class.getSimpleName();
     private AppDBHelper appDBHelper;
+    @BindView(R.id.root_layout)
+    RelativeLayout rootLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.visitor_form)
@@ -87,51 +102,24 @@ public class VisitorListFragment extends Fragment {
     }
 
     private int prepareVisitor() {
-        ItemTable itemTable = new ItemTable(appDBHelper);
+        if(!CommonUtility.isNetworkAvailable(getContext())){
+            ItemTable itemTable = new ItemTable(appDBHelper);
+            visitorList= itemTable.getAllData();
+        }else {
+            // network call will be here to get the list of visitor from server
+            Communicator communicator = new Communicator();
+            AppSharedPreferenceHelper appPref = AppSharedPreferenceHelper.getInstance(getContext());
+            String patientID= appPref.getPatientIDFromSP();
+            communicator.getVisitorListFromServer(patientID);
+        }
 
-        visitorList= itemTable.getAllData();
-//        if(visitorList==null){
-//            visitorList= new ArrayList<>();
-//        }else visitorList.clear();
-
-//        Visitor visitor1= new Visitor("Zeeshan", "Noida", "9873799571", true);
-//        Visitor visitor2= new Visitor("Ram Kumar", "Gurgaon", "8802390096", true);
-//        visitorList.add(visitor1);
-//        visitorList.add(visitor2);
-        return visitorList.size();
+         return visitorList.size();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
-    }
-
-    private void showDialog(){
-        // Create custom dialog object
-        final Dialog dialog = new Dialog(getContext());
-        // Include dialog.xml file
-        dialog.setContentView(R.layout.visitor_form);
-        // Set dialog title
-//        dialog.setTitle(" Visitor Form ");
-
-//        // set values for custom dialog components - text, image and button
-//        TextView text = (TextView) dialog.findViewById(R.id.textDialog);
-//        text.setText("Custom dialog Android example.");
-//        ImageView image = (ImageView) dialog.findViewById(R.id.imageDialog);
-//        image.setImageResource(R.drawable.image0);
-
-        dialog.show();
-
-        Button declineButton = (Button) dialog.findViewById(R.id.cancelBtn);
-        // if decline button is clicked, close the custom dialog
-        declineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Close dialog
-                dialog.dismiss();
-            }
-        });
     }
     @Override
     public void onStart() {
@@ -190,25 +178,38 @@ public class VisitorListFragment extends Fragment {
     }
 
     public void addNewVisitor(Visitor data){
-       // if(adapter==null){
-            visitorList.add(data);
-        mRecyclerView.setVisibility(View.VISIBLE);
 
-        adapter= new VisitorAdapter(getContext(), visitorList);
+        if(adapter==null){
+            visitorList.add(data);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            adapter= new VisitorAdapter(getContext(), visitorList);
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(adapter);
+        }else{
+            adapter.addItem(data);
+        }
         if(adapter.getItemCount()==2){
                 allowVisitorBtn.setVisibility(View.GONE);
             }
-      //  }
-//        else{
-//            adapter.addItem(data);
-//            if(adapter.getItemCount()==2){
-//                allowVisitorBtn.setVisibility(View.GONE);
-//            }
-//
-//        }
+
+    }
+    @Subscribe
+    public void onServerEvent(ServerEvent serverEvent){
+        String responseMsg="";
+        if(serverEvent.getServerResponse() instanceof VisitorListResponse){
+            if(serverEvent!=null && serverEvent.getServerResponse()!=null ){
+                String status=((VisitorListResponse) serverEvent.getServerResponse()).getStatus();
+                responseMsg=((VisitorListResponse) serverEvent.getServerResponse()).getMessage();
+                // get the visitor list
+            }
+        }
+
+    }
+
+    @Subscribe
+    public void onErrorEvent(ErrorEvent errorEvent){
+        CommonUtility.showSnackBar(rootLayout, errorEvent.getErrorMsg());
     }
 
 }

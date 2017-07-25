@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by inmkhan021 on 7/12/2017.
  */
 
-public class HospitalUser implements Serializable {
+public class Attendant implements Serializable {
     private String patientName;
     private String patientId;
     private String visitorOrAttendantName;
