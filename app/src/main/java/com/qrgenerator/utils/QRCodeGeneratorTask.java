@@ -9,13 +9,13 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.qrgeneratorapp.max.R;
-import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.models.Attendant;
 
 /**
  * Created by inmkhan021 on 7/11/2017.
  */
 
-public class QRCodeGeneratorTask extends AsyncTask<HospitalUser, Integer , Bitmap> {
+public class QRCodeGeneratorTask extends AsyncTask<Attendant, Integer , Bitmap> {
     public final static int QRcodeWidth = 500 ;
     private Context mContext;
     private OnTaskCompleted listener;
@@ -26,7 +26,7 @@ public class QRCodeGeneratorTask extends AsyncTask<HospitalUser, Integer , Bitma
     }
 
     @Override
-    protected Bitmap doInBackground(HospitalUser... params) {
+    protected Bitmap doInBackground(Attendant... params) {
         BitMatrix bitMatrix=null;
         try {
             bitMatrix = new MultiFormatWriter().encode(

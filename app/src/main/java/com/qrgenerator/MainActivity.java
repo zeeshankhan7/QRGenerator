@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import com.qrgenerator.customviews.CustomFontButton;
 import com.qrgenerator.customviews.CustomFontEditText;
-import com.qrgenerator.models.HospitalUser;
+import com.qrgenerator.models.Attendant;
+import com.qrgenerator.utils.AppSharedPreferenceHelper;
 import com.qrgenerator.utils.CommonUtility;
 import com.qrgenerator.utils.Constants;
 import com.qrgeneratorapp.max.R;
@@ -34,15 +35,16 @@ LinearLayout activityMainContainer;
     CustomFontButton loginBtn;
     @OnClick(R.id.loginBtn)
     public void login() {
-        Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
-        HospitalUser hospitalUser = new HospitalUser();
-        hospitalUser.setPatientId(patientId.getText().toString());
-        hospitalUser.setPatientName(patientName.getText().toString());
-        hospitalUser.setVisitorOrAttendantMobileNo(visitorOrAttendantMobileNo.getText().toString());
-        hospitalUser.setVisitorOrAttendantName(visitorOrAttendantName.getText().toString());
+        Attendant attendant = new Attendant();
+        attendant.setPatientId(patientId.getText().toString());
+        attendant.setPatientName(patientName.getText().toString());
+        attendant.setVisitorOrAttendantMobileNo(visitorOrAttendantMobileNo.getText().toString());
+        attendant.setVisitorOrAttendantName(visitorOrAttendantName.getText().toString());
         //         card_view:cardBackgroundColor="@color/colorAccent"
-        if(CommonUtility.isValidUserModel(hospitalUser)){
-            intent.putExtra("HospitalUser", hospitalUser);
+        if(CommonUtility.isValidUserModel(attendant)){
+            AppSharedPreferenceHelper appPref = AppSharedPreferenceHelper.getInstance(getApplicationContext());
+            appPref.saveAttendant(attendant);
+            Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
             startActivity(intent);
             finish();
 

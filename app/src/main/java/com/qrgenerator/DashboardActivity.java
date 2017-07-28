@@ -10,29 +10,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MenuItem;
 
 import com.qrgenerator.customviews.CustomDialogFragment;
 import com.qrgenerator.fragments.HospitalGuideFragment;
 import com.qrgenerator.fragments.InstructionFragment;
-import com.qrgenerator.fragments.QRCodeFragment;
 import com.qrgenerator.fragments.VisitorListFragment;
-import com.qrgenerator.models.HospitalUser;
 import com.qrgenerator.models.Visitor;
 import com.qrgenerator.utils.Constants;
 import com.qrgenerator.utils.OnTaskCompleted;
 import com.qrgeneratorapp.max.R;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements OnTaskCompleted ,CustomDialogFragment.DataPassListener  {
 
+    private static final  String LOG_TAG= DashboardActivity.class.getSimpleName();
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private QRCodeFragment qrCodeFragment;
-    private VisitorListFragment mVisitorListFragment;
+//    private QRCodeFragment qrCodeFragment;
+    private VisitorListFragment visitorListFragment;
+    private HospitalGuideFragment hospitalGuideFragment;
+    private InstructionFragment instructionFragment;
+    private ViewPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,39 +54,39 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(Constants.tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(Constants.tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[2]);
-        tabLayout.getTabAt(3).setIcon(Constants.tabIcons[3]);
+//        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[2]);
+        tabLayout.getTabAt(2).setIcon(Constants.tabIcons[3]);
     }
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        HospitalUser hospitalUser=(HospitalUser) getIntent().getSerializableExtra("HospitalUser");
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("HospitalUser", hospitalUser);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         // set Fragmentclass Arguments
-        qrCodeFragment = new QRCodeFragment();
-        mVisitorListFragment=new VisitorListFragment();
-        qrCodeFragment.setArguments(bundle);
-        adapter.addFragment(new InstructionFragment(), Constants.INSTRUCTION_TAB);
-        adapter.addFragment(new HospitalGuideFragment(), Constants.GUIDE_TAB);
-        adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
-        adapter.addFragment(mVisitorListFragment, Constants.VISITOR_TAB);
+//        qrCodeFragment = new QRCodeFragment();
+        visitorListFragment =new VisitorListFragment();
+        hospitalGuideFragment= new HospitalGuideFragment();
+        instructionFragment= new InstructionFragment();
+        adapter.addFragment(instructionFragment, Constants.INSTRUCTION_TAB);
+        adapter.addFragment(hospitalGuideFragment, Constants.GUIDE_TAB);
+//        adapter.addFragment(qrCodeFragment, Constants.QR_CODE_TAB);
+        adapter.addFragment(visitorListFragment, Constants.VISITOR_TAB);
         viewPager.setAdapter(adapter);
     }
 
     @Override
     public void onTaskCompleted(Bitmap bitmap) {
-        qrCodeFragment.setQRCodeBitmap(bitmap);
+//        qrCodeFragment.setQRCodeBitmap(bitmap);
         Log.d("Irshad", " inside onTaskCompleted ");
     }
 
     @Override
     public void passData(Visitor data) {
-        mVisitorListFragment.addNewVisitor(data);
+        visitorListFragment.addNewVisitor(data);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
+
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
+        private int count;
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -92,9 +96,9 @@ public class DashboardActivity extends AppCompatActivity implements OnTaskComple
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
-
         @Override
         public int getCount() {
+
             return mFragmentList.size();
         }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -13,18 +14,34 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.qrgenerator.Events.ErrorEvent;
+import com.qrgenerator.Events.ServerEvent;
+import com.qrgenerator.models.AddVisitorParams;
+import com.qrgenerator.models.AddVisitorResponse;
 import com.qrgenerator.models.Visitor;
+import com.qrgenerator.retrofit.ApiClient;
+import com.qrgenerator.retrofit.ApiInterface;
+import com.qrgenerator.retrofit.BusProvider;
+import com.qrgenerator.retrofit.Communicator;
 import com.qrgenerator.utils.CommonUtility;
 import com.qrgenerator.utils.Constants;
+import com.qrgenerator.utils.NetworkCallUtil;
 import com.qrgeneratorapp.databases.AppDBHelper;
 import com.qrgeneratorapp.databases.ItemTable;
 import com.qrgeneratorapp.max.R;
+import com.squareup.otto.Subscribe;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by inmkhan021 on 7/17/2017.
@@ -32,7 +49,7 @@ import butterknife.Unbinder;
 public class CustomDialogFragment extends DialogFragment {
 
 
-
+    private static final String LOG_TAG= CustomDialogFragment.class.getSimpleName();
 
 
     @BindView(R.id.visitor_name_editTxt)
@@ -61,18 +78,16 @@ public class CustomDialogFragment extends DialogFragment {
     }
     @OnClick(R.id.SubmitBtn)
     void submitButtonClick() {
-        Visitor visitor = new Visitor();
+        final Visitor visitor = new Visitor();
         visitor.setPatientId(patientId.getText().toString());
         visitor.setPatientName(patientName.getText().toString());
         visitor.setVisitorMobileNo(visitorMobileNo.getText().toString());
         visitor.setVisitorName(visitorName.getText().toString());
 
         if(CommonUtility.isValidVisitorModel(visitor)) {
-            mCallback.passData(visitor);
-            AppDBHelper appDBHelper = new AppDBHelper(getContext());
-            ItemTable itemTable = new ItemTable(appDBHelper);
-            itemTable.insert(visitor);
-            getDialog().dismiss();
+            Communicator communicator = new Communicator();
+            AddVisitorParams params= new AddVisitorParams(visitor.getVisitorName(),visitor.getVisitorMobileNo(),visitor.getPatientId());
+            communicator.addVisitorToServer(params,visitor);
         }else{
             CommonUtility.showSnackBar(activity_main1, Constants.REQUEST_MESSAGE);;
         }
@@ -110,5 +125,45 @@ public class CustomDialogFragment extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(LOG_TAG , " onResume called ");
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(LOG_TAG , " onPause called ");
+        BusProvider.getInstance().unregister(this);
+    }
+    @Subscribe
+    public void onServerEvent(ServerEvent serverEvent){
+        String responseMsg="";
+        if(serverEvent.getServerResponse() instanceof AddVisitorResponse){
+            if(serverEvent!=null && serverEvent.getServerResponse()!=null ){
+                String status=((AddVisitorResponse) serverEvent.getServerResponse()).getStatus();
+                responseMsg=((AddVisitorResponse) serverEvent.getServerResponse()).getMessage();
+                Visitor visitor=serverEvent.getVisitor();
+                if(!CommonUtility.isStringEmptyOrNull(status) && status.equalsIgnoreCase(Constants.RESPONSE_SUCCESS)){
+                    mCallback.passData(visitor);
+                    AppDBHelper appDBHelper = new AppDBHelper(getContext());
+                    ItemTable itemTable = new ItemTable(appDBHelper);
+                    itemTable.insert(visitor);
+                    CommonUtility.showSnackBar(activity_main1, responseMsg);
+                    getDialog().dismiss();
+                }else{
+                    CommonUtility.showSnackBar(activity_main1, responseMsg);
+                }
+            }
+        }
+
+    }
+
+    @Subscribe
+    public void onErrorEvent(ErrorEvent errorEvent){
+        CommonUtility.showSnackBar(activity_main1, errorEvent.getErrorMsg());
     }
 }

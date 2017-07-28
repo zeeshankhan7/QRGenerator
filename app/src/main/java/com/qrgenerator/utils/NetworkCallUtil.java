@@ -1,5 +1,6 @@
 package com.qrgenerator.utils;
 
+import android.content.res.AssetManager;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -10,6 +11,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyStore;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 
 /**************
  * this class contains all the functions for network related utilities
@@ -36,7 +42,7 @@ public class NetworkCallUtil {
         Log.v("#### URL being hit ###", urlString);
         String response = "";
         URL url = new URL(urlString);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
         urlConnection.setConnectTimeout(Constants.DEFAULT_HTTP_CONNECT_TIMEOUT);
         urlConnection.setReadTimeout(Constants.DEFAULT_HTTP_READ_TIMEOUT);
         urlConnection.setRequestMethod("POST");
