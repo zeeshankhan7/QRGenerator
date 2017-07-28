@@ -2,6 +2,7 @@ package com.qrgenerator.customviews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.qrgenerator.Events.ErrorEvent;
 import com.qrgenerator.Events.ServerEvent;
+import com.qrgenerator.fragments.VisitorListFragment;
 import com.qrgenerator.models.AddVisitorParams;
 import com.qrgenerator.models.AddVisitorResponse;
 import com.qrgenerator.models.Visitor;
@@ -33,7 +35,19 @@ import com.qrgeneratorapp.databases.ItemTable;
 import com.qrgeneratorapp.max.R;
 import com.squareup.otto.Subscribe;
 
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -149,9 +163,12 @@ public class CustomDialogFragment extends DialogFragment {
                 Visitor visitor=serverEvent.getVisitor();
                 if(!CommonUtility.isStringEmptyOrNull(status) && status.equalsIgnoreCase(Constants.RESPONSE_SUCCESS)){
                     mCallback.passData(visitor);
+
                     AppDBHelper appDBHelper = new AppDBHelper(getContext());
                     ItemTable itemTable = new ItemTable(appDBHelper);
                     itemTable.insert(visitor);
+                    String serverURL = "http://demo-ramnath.rhcloud.com/qrLinkSent.do";
+                    new LongOperation2().execute(serverURL,patientId.getText().toString(),visitorMobileNo.getText().toString());
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                     getDialog().dismiss();
                 }else{
@@ -165,5 +182,59 @@ public class CustomDialogFragment extends DialogFragment {
     @Subscribe
     public void onErrorEvent(ErrorEvent errorEvent){
         CommonUtility.showSnackBar(activity_main1, errorEvent.getErrorMsg());
+    }
+
+    private class LongOperation2  extends AsyncTask<String, Void, Void>{
+        private final HttpClient Client = new DefaultHttpClient();
+        private String content;
+        private String Error = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            try {
+                JSONObject JSON_STRING = new JSONObject();
+
+                JSON_STRING.put("patientId", params[1]);
+                JSON_STRING.put("contactNo", params[2]);
+                Log.d(LOG_TAG , " patientId string "+ params[1]);
+                Log.d(LOG_TAG , " contactNumber string "+ params[2]);
+                Log.d(LOG_TAG , " JSON string "+ JSON_STRING.toString());
+                HttpPost httpPost = new HttpPost(params[0]);
+                StringEntity requestEntity = new StringEntity(
+                        JSON_STRING.toString());
+                httpPost.setHeader(HTTP.CONTENT_TYPE, "application/json");
+                httpPost.setEntity(requestEntity);
+                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                content = Client.execute(httpPost, responseHandler);
+                Log.d(LOG_TAG, " content string is not null " + content);
+                if (content != null) {
+                    JSONObject jsonObject = new JSONObject(content);
+                    String status = jsonObject.getString("status");
+                    String msg = jsonObject.getString("message");
+                    Log.d(LOG_TAG, " status :" + status);
+                    Log.d(LOG_TAG, " message :" + msg);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }
