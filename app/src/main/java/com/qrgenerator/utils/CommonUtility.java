@@ -47,7 +47,7 @@ public class CommonUtility {
     }
 //    public static int isValidVisitorModel(Visitor visitor) {
 //        int isValidVisitorModel= -1;
-//        if (visitor.getVisiterName() == null || visitor.getVisiterName().equals("") || visitor.getVisiterName().equals("NULL")) {
+//        if (visitor.getVisitorName() == null || visitor.getVisitorName().equals("") || visitor.getVisitorName().equals("NULL")) {
 //            isValidVisitorModel=0;
 //        } else if(visitor.getContactNumber() == null || visitor.getContactNumber().equals("") || visitor.getContactNumber().equals("NULL")) {
 //            isValidVisitorModel=1;

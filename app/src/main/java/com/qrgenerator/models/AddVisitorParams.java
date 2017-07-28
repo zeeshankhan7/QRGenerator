@@ -5,12 +5,12 @@ package com.qrgenerator.models;
  */
 
 public class AddVisitorParams {
-    private String visiterName;
+    private String visitorName;
     private String contactNumber;
     private String patientId;
 
     public AddVisitorParams(String visitorName, String visitorMobileNo, String patientId) {
-        this.visiterName = visitorName;
+        this.visitorName = visitorName;
         this.contactNumber = visitorMobileNo;
         this.patientId = patientId;
     }
@@ -23,12 +23,12 @@ public class AddVisitorParams {
         this.patientId = patientId;
     }
 
-    public String getVisiterName() {
-        return visiterName;
+    public String getVisitorName() {
+        return visitorName;
     }
 
-    public void setVisiterName(String visiterName) {
-        this.visiterName = visiterName;
+    public void setVisitorName(String visitorName) {
+        this.visitorName = visitorName;
     }
 
     public String getContactNumber() {
