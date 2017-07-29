@@ -217,6 +217,7 @@ public class VisitorListFragment extends Fragment {
                 allowVisitorBtn.setVisibility(View.GONE);
             }
 
+
     }
 //    @Subscribe
 //    public void onServerEvent(ServerEvent serverEvent){
@@ -243,110 +244,133 @@ public class VisitorListFragment extends Fragment {
 //    }
     // Class with extends AsyncTask class
     private class LongOperation  extends AsyncTask<String, Void, String> {
+    private final HttpClient Client = new DefaultHttpClient();
+    private String content;
+    private String Error = null;
+    private ProgressDialog Dialog = new ProgressDialog(getContext());
+    @Override
+    protected String doInBackground(String... params) {
+        try {
 
-        private final HttpClient Client = new DefaultHttpClient();
-        private String content;
-        private String Error = null;
-        private ProgressDialog Dialog = new ProgressDialog(getContext());
-        protected void onPreExecute() {
-            // NOTE: You can call UI Element here.
-            Dialog.setMessage("Downloading visitor list..");
-            Dialog.setCancelable(false);
-            Dialog.show();
-        }
+            // Call long running operations here (perform background computation)
+            // NOTE: Don't call UI Element here.
 
-        // Call after onPreExecute method
-        protected String doInBackground(String... urls) {
-            try {
-
-                // Call long running operations here (perform background computation)
-                // NOTE: Don't call UI Element here.
-
-                // Server url call by GET method
-                String patientId= AppSharedPreferenceHelper.getInstance(getContext()).getPatientIDFromSP();
-                JSONObject JSON_STRING= new JSONObject();
-                JSON_STRING.put("patientId",1);
-                HttpPost httpPost = new HttpPost(urls[0]);
-                StringEntity requestEntity = new StringEntity(
-                        JSON_STRING.toString());
-                httpPost.setHeader(HTTP.CONTENT_TYPE , "application/json");
-                httpPost.setEntity(requestEntity);
-                ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                content = Client.execute(httpPost, responseHandler);
-                Log.d(LOG_TAG, " content string is not null "+ content);
-                if (content != null) {
-                    JSONObject jsonObject= new JSONObject(content);
-                    String status =jsonObject.getString("status");
-                    if(status.equals(Constants.RESPONSE_FAILURE)){
-                        String msg= jsonObject.getString("message");
-                        Error = msg;
-                    }else if(status.equals(Constants.RESPONSE_SUCCESS)){
-                        String patientName= jsonObject.getString("patientName");
-                        JSONArray visitorArr= jsonObject.getJSONArray("visitors");
-                        for(int i=0; i<visitorArr.length();i++){
-                            JSONObject mJsonObject = visitorArr.getJSONObject(i);
-                            String visitorName=mJsonObject.getString("visitorName");
-                            String contactNumber=mJsonObject.getString("contactNumber");
-                            Visitor visitor= new Visitor(visitorName,patientName,patientId,contactNumber,true);
-                            visitorList.add(visitor);
-                        }
+            // Server url call by GET method
+            String patientId= AppSharedPreferenceHelper.getInstance(getContext()).getPatientIDFromSP();
+            JSONObject JSON_STRING= new JSONObject();
+            JSON_STRING.put("patientId",patientId);
+            HttpPost httpPost = new HttpPost(params[0]);
+            StringEntity requestEntity = new StringEntity(
+                    JSON_STRING.toString());
+            httpPost.setHeader(HTTP.CONTENT_TYPE , "application/json");
+            httpPost.setEntity(requestEntity);
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            content = Client.execute(httpPost, responseHandler);
+            Log.d(LOG_TAG, " content string is not null "+ content);
+            if (content != null) {
+                JSONObject jsonObject= new JSONObject(content);
+                String status =jsonObject.getString("status");
+                String msg= jsonObject.getString("message");//
+                if(status.equals(Constants.RESPONSE_FAILURE)){
+                    Error = msg;
+                    cancel(true);
+                }else if(status.equals(Constants.RESPONSE_SUCCESS ) && msg.equalsIgnoreCase("Cuurently, there are no Visitors.")){
+                    Log.d(LOG_TAG, "Cuurently, there are no Visitors.");
+                    Error= "Cuurently, there are no Visitors.";
+                    cancel(true);
 
 //                        AppDBHelper appDBHelper = new AppDBHelper(getContext());
 //                        ItemTable itemTable = new ItemTable(appDBHelper);
 //                        itemTable.insert(visitor);
 
+                }else if(status.equals(Constants.RESPONSE_SUCCESS )&& !msg.equalsIgnoreCase("Cuurently, there are no Visitors.")){
+                    String patientName= jsonObject.getString("patientName");
+                    JSONArray visitorArr= jsonObject.getJSONArray("visitors");
+                    for(int i=0; i<visitorArr.length();i++){
+                        JSONObject mJsonObject = visitorArr.getJSONObject(i);
+                        String visitorName=mJsonObject.getString("visitorName");
+                        String contactNumber=mJsonObject.getString("contactNumber");
+                        Visitor visitor= new Visitor(visitorName,patientName,patientId,contactNumber,true);
+                        visitorList.add(visitor);
                     }
-                    Log.d(LOG_TAG, " content string is not null "+ jsonObject.toString());
-                }
-            } catch (ClientProtocolException e) {
-                Error = e.getMessage();
-                cancel(true);
-            } catch (JSONException je) {
-                Error = je.getMessage();
-                cancel(true);
-            }catch (IOException e) {
-                Error = e.getMessage();
-                cancel(true);
-            }
 
-            return Error;
+                }
+                Log.d(LOG_TAG, " content string is not null "+ jsonObject.toString());
+            }
+        } catch (ClientProtocolException e) {
+            Error = e.getMessage();
+            cancel(true);
+        } catch (JSONException je) {
+            Error = je.getMessage();
+            cancel(true);
+        }catch (IOException e) {
+            Error = e.getMessage();
+            cancel(true);
         }
 
-        protected void onPostExecute(String msg) {
-            // NOTE: You can call UI Element here.
+        return Error;
+    }
 
-            // Close progress dialog
-            Dialog.dismiss();
+    @Override
+    protected void onPreExecute() {
+        // NOTE: You can call UI Element here.
+        Dialog.setMessage("Downloading visitor list..");
+        Dialog.setCancelable(false);
+        Dialog.show();
+    }
 
-            if (Error != null) {
-                Toast.makeText(getContext(), "Error: " +msg ,Toast.LENGTH_LONG).show();
+    @Override
+    protected void onCancelled(String s) {
+        super.onCancelled(s);
+        Dialog.dismiss();
+        CommonUtility.showSnackBar(rootLayout,s);
+        Log.d(LOG_TAG ," inside onCancelled " + s);
+    }
 
-                Log.d(LOG_TAG ,"Error occurred : ");
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        Dialog.dismiss();
+        Log.d(LOG_TAG ," inside onCancelled ");
+    }
 
-            } else {
-                Log.d(LOG_TAG ,"Output : "+msg);
-                allowedVisitorCount=visitorList.size();
-                if(allowedVisitorCount==1 ){
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                    //  allowVisitorBtn.setVisibility(View.VISIBLE);
-                    adapter= new VisitorAdapter(getContext(), visitorList);
-                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                    mRecyclerView.setAdapter(adapter);
-                }else if(allowedVisitorCount==0 ){
-                    mRecyclerView.setVisibility(View.GONE);
-                    allowVisitorBtn.setVisibility(View.VISIBLE);
-                }else if(allowedVisitorCount>1){
-                    allowVisitorBtn.setVisibility(View.GONE);
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                    adapter= new VisitorAdapter(getContext(), visitorList);
-                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                    mRecyclerView.setAdapter(adapter);
-                }
+    @Override
+    protected void onPostExecute(String msg) {
+        // Close progress dialog
+        Log.d(LOG_TAG ," inside onPostExecute ");
+        Dialog.dismiss();
 
+        if (Error != null) {
+            CommonUtility.showSnackBar(rootLayout,msg);
+            Log.d(LOG_TAG ,"Error occurred : ");
+
+        } else {
+            Log.d(LOG_TAG ,"Output : "+msg);
+            allowedVisitorCount=visitorList.size();
+            if(allowedVisitorCount==1 ){
+                mRecyclerView.setVisibility(View.VISIBLE);
+                //  allowVisitorBtn.setVisibility(View.VISIBLE);
+                adapter= new VisitorAdapter(getContext(), visitorList);
+                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                mRecyclerView.setAdapter(adapter);
+            }else if(allowedVisitorCount==0 ){
+                mRecyclerView.setVisibility(View.GONE);
+                allowVisitorBtn.setVisibility(View.VISIBLE);
+            }else if(allowedVisitorCount>1){
+                allowVisitorBtn.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                adapter= new VisitorAdapter(getContext(), visitorList);
+                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                mRecyclerView.setAdapter(adapter);
             }
+
         }
+
+
+
+}
 
 
 }
