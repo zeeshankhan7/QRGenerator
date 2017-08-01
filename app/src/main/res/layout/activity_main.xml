@@ -35,18 +35,16 @@
             <LinearLayout
                 android:id="@+id/activity_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/layout_bg"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.qrgenerator.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
+                    android:visibility="gone"
                     app:hintEnabled="true">
 
                     <com.qrgenerator.customviews.CustomFontEditText
@@ -56,6 +54,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:ems="10"
+                        android:visibility="gone"
                         android:hint="Attendant or Visitor Name"
                         android:inputType="textPersonName"
                         android:typeface="serif" />
@@ -81,10 +80,12 @@
                 <com.qrgenerator.customviews.CustomFontTextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:custom_font="signika_regular"
                     app:hintEnabled="true">
                 <com.qrgenerator.customviews.CustomFontEditText
                     android:id="@+id/patient_name_editText"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -116,7 +117,7 @@
 </com.qrgenerator.customviews.CustomFontTextInputLayout>
                 <com.qrgenerator.customviews.CustomFontButton
                     android:id="@+id/loginBtn"
-                    android:layout_width="100dp"
+                    android:layout_width="400dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_below="@+id/mobile_no_editText"

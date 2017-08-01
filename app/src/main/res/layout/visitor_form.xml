@@ -61,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:custom_font="signika_regular"
+                    android:visibility="gone"
                     app:hintEnabled="true">
                 <com.qrgenerator.customviews.CustomFontEditText
                     android:id="@+id/patient_name_editTxt"
@@ -70,6 +71,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/visitor_name_editTxt"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:ems="10"
                     android:hint="Patient Name"
                     android:inputType="textPersonName"

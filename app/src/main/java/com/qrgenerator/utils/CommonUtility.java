@@ -34,11 +34,12 @@ public class CommonUtility {
     }
     public static boolean isValidUserModel(Attendant attendant) {
         boolean isValidUserModel= true;
-        if (attendant.getVisitorOrAttendantName() == null || attendant.getVisitorOrAttendantName().equals("") || attendant.getVisitorOrAttendantName().equals("NULL")) {
-            isValidUserModel=false;
-        } else if(attendant.getPatientName() == null || attendant.getPatientName().equals("") || attendant.getPatientName().equals("NULL")) {
-            isValidUserModel=false;
-        }else if(attendant.getPatientId() == null || attendant.getPatientId().equals("") || attendant.getPatientId().equals("NULL")) {
+//        if (attendant.getVisitorOrAttendantName() == null || attendant.getVisitorOrAttendantName().equals("") || attendant.getVisitorOrAttendantName().equals("NULL")) {
+//            isValidUserModel=false;
+//        } else if(attendant.getPatientName() == null || attendant.getPatientName().equals("") || attendant.getPatientName().equals("NULL")) {
+//            isValidUserModel=false;
+//        }else
+        if(attendant.getPatientId() == null || attendant.getPatientId().equals("") || attendant.getPatientId().equals("NULL")) {
             isValidUserModel=false;
         }else if(attendant.getVisitorOrAttendantMobileNo() == null || attendant.getVisitorOrAttendantMobileNo().equals("") || attendant.getVisitorOrAttendantMobileNo().equals("NULL")) {
             isValidUserModel=false;

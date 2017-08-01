@@ -7,17 +7,17 @@ import java.io.Serializable;
  */
 
 public class Attendant implements Serializable {
-    private String patientName;
+//    private String patientName;
     private String patientId;
-    private String visitorOrAttendantName;
+//    private String visitorOrAttendantName;
     private String visitorOrAttendantMobileNo;
-    public String getPatientName() {
-        return patientName;
-    }
+//    public String getPatientName() {
+//        return patientName;
+//    }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
+//    public void setPatientName(String patientName) {
+//        this.patientName = patientName;
+//    }
 
     public String getPatientId() {
         return patientId;
@@ -27,13 +27,13 @@ public class Attendant implements Serializable {
         this.patientId = patientId;
     }
 
-    public String getVisitorOrAttendantName() {
-        return visitorOrAttendantName;
-    }
+//    public String getVisitorOrAttendantName() {
+//        return visitorOrAttendantName;
+//    }
 
-    public void setVisitorOrAttendantName(String visitorOrAttendantName) {
-        this.visitorOrAttendantName = visitorOrAttendantName;
-    }
+//    public void setVisitorOrAttendantName(String visitorOrAttendantName) {
+//        this.visitorOrAttendantName = visitorOrAttendantName;
+//    }
 
     public String getVisitorOrAttendantMobileNo() {
         return visitorOrAttendantMobileNo;
@@ -45,6 +45,6 @@ public class Attendant implements Serializable {
 
     @Override
     public String toString() {
-        return visitorOrAttendantName+":"+patientName+":"+patientId+":"+visitorOrAttendantMobileNo;
+        return patientId+":"+visitorOrAttendantMobileNo;
     }
 }

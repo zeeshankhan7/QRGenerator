@@ -19,14 +19,14 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity  {
 
-    @BindView(R.id.visitor_or_atendnt_editText)
-    CustomFontEditText visitorOrAttendantName;
+//    @BindView(R.id.visitor_or_atendnt_editText)
+//    CustomFontEditText visitorOrAttendantName;
     @BindView(R.id.mobile_no_editText)
     CustomFontEditText visitorOrAttendantMobileNo;
     @BindView(R.id.patient_id_editText)
     CustomFontEditText patientId;
-    @BindView(R.id.patient_name_editText)
-    CustomFontEditText patientName;
+//    @BindView(R.id.patient_name_editText)
+//    CustomFontEditText patientName;
     @BindView(R.id.container)
     CoordinatorLayout container;
     @BindView(R.id.activity_main)
@@ -37,9 +37,9 @@ LinearLayout activityMainContainer;
     public void login() {
         Attendant attendant = new Attendant();
         attendant.setPatientId(patientId.getText().toString());
-        attendant.setPatientName(patientName.getText().toString());
+//        attendant.setPatientName(patientName.getText().toString());
         attendant.setVisitorOrAttendantMobileNo(visitorOrAttendantMobileNo.getText().toString());
-        attendant.setVisitorOrAttendantName(visitorOrAttendantName.getText().toString());
+//        attendant.setVisitorOrAttendantName(visitorOrAttendantName.getText().toString());
         //         card_view:cardBackgroundColor="@color/colorAccent"
         if(CommonUtility.isValidUserModel(attendant)){
             AppSharedPreferenceHelper appPref = AppSharedPreferenceHelper.getInstance(getApplicationContext());
