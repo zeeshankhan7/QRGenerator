@@ -2,6 +2,7 @@ package com.qrgenerator.retrofit;
 
 import com.qrgenerator.models.AddVisitorParams;
 import com.qrgenerator.models.AddVisitorResponse;
+import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.VisitorListResponse;
 import com.qrgenerator.models.GetVisitorParams;
 
@@ -20,4 +21,6 @@ public interface ApiInterface {
     Call<AddVisitorResponse> addVisitor(@Header("Content-Type") String content_type, @Body AddVisitorParams params);
     @POST("getVisitors.do")
     Call<VisitorListResponse> getVisitorList(@Header("Content-Type") String content_type, @Body GetVisitorParams params);
+    @POST("loginAttendent.do")
+    Call<AddVisitorResponse> loginAttendant(@Header("Content-Type") String content_type, @Body Attendant params);
 }

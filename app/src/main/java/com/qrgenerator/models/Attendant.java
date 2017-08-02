@@ -10,7 +10,12 @@ public class Attendant implements Serializable {
 //    private String patientName;
     private String patientId;
 //    private String visitorOrAttendantName;
-    private String visitorOrAttendantMobileNo;
+    private String attendentContactNo;
+
+    public Attendant(String patientId, String attendantContactNo) {
+        this.patientId = patientId;
+        this.attendentContactNo = attendantContactNo;
+    }
 //    public String getPatientName() {
 //        return patientName;
 //    }
@@ -35,16 +40,16 @@ public class Attendant implements Serializable {
 //        this.visitorOrAttendantName = visitorOrAttendantName;
 //    }
 
-    public String getVisitorOrAttendantMobileNo() {
-        return visitorOrAttendantMobileNo;
+    public String getAttendentContactNo() {
+        return attendentContactNo;
     }
 
-    public void setVisitorOrAttendantMobileNo(String visitorOrAttendantMobileNo) {
-        this.visitorOrAttendantMobileNo = visitorOrAttendantMobileNo;
+    public void setAttendentContactNo(String attendentContactNo) {
+        this.attendentContactNo = attendentContactNo;
     }
 
     @Override
     public String toString() {
-        return patientId+":"+visitorOrAttendantMobileNo;
+        return patientId+":"+ attendentContactNo;
     }
 }

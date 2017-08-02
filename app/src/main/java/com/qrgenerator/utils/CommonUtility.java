@@ -9,11 +9,6 @@ import android.view.View;
 import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.Visitor;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
 /**
  * Created by inmkhan021 on 7/12/2017.
  */
@@ -41,7 +36,7 @@ public class CommonUtility {
 //        }else
         if(attendant.getPatientId() == null || attendant.getPatientId().equals("") || attendant.getPatientId().equals("NULL")) {
             isValidUserModel=false;
-        }else if(attendant.getVisitorOrAttendantMobileNo() == null || attendant.getVisitorOrAttendantMobileNo().equals("") || attendant.getVisitorOrAttendantMobileNo().equals("NULL")) {
+        }else if(attendant.getAttendentContactNo() == null || attendant.getAttendentContactNo().equals("") || attendant.getAttendentContactNo().equals("NULL")) {
             isValidUserModel=false;
         }
         return isValidUserModel;
