@@ -114,7 +114,6 @@ public class VisitorListFragment extends Fragment {
         view=inflater.inflate(R.layout.fragment_visitor, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        initLayoutComponent();
         return view;
     }
 
@@ -374,6 +373,18 @@ public class VisitorListFragment extends Fragment {
 
 
 }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // animate here
+            Log.d(LOG_TAG, "isVisibleToUser: "+ isVisibleToUser);
+            initLayoutComponent();
+        }else{
+            Log.d(LOG_TAG, "fragment is no longer visible");
+            // fragment is no longer visible
+        }
+    }
 
 
 }
