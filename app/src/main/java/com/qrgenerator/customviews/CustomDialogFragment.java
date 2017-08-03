@@ -172,7 +172,6 @@ public class CustomDialogFragment extends DialogFragment {
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                     getDialog().dismiss();
                 }else{
-                    getDialog().dismiss();
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                 }
             }
