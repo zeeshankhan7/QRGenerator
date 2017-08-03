@@ -68,9 +68,11 @@ public class CommonUtility {
         boolean isValidVisitorModel= true;
         if (visitor.getVisitorName() == null || visitor.getVisitorName().equals("") || visitor.getVisitorName().equals("NULL")) {
             isValidVisitorModel=false;
-        } else if(visitor.getPatientName() == null || visitor.getPatientName().equals("") || visitor.getPatientName().equals("NULL")) {
-            isValidVisitorModel=false;
-        }else if(visitor.getPatientId() == null || visitor.getPatientId().equals("") || visitor.getPatientId().equals("NULL")) {
+        }
+//        else if(visitor.getPatientName() == null || visitor.getPatientName().equals("") || visitor.getPatientName().equals("NULL")) {
+//            isValidVisitorModel=false;
+//        }
+        else if(visitor.getPatientId() == null || visitor.getPatientId().equals("") || visitor.getPatientId().equals("NULL")) {
             isValidVisitorModel=false;
         }else if(visitor.getVisitorMobileNo() == null || visitor.getVisitorMobileNo().equals("") || visitor.getVisitorMobileNo().equals("NULL")) {
             isValidVisitorModel=false;

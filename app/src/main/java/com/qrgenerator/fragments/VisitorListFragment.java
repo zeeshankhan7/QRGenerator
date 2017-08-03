@@ -79,6 +79,9 @@ public class VisitorListFragment extends Fragment {
     View v;
     @BindView(R.id.allow_visitor_btn)
     FloatingActionButton allowVisitorBtn;
+//    private boolean isViewShown=false;
+    private boolean isStarted = false;
+    private boolean isVisible = false;
 
     @OnClick(R.id.allow_visitor_btn)
     public void buttonClick() {
@@ -146,6 +149,10 @@ public class VisitorListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d(LOG_TAG ," inside onStart");
+        isStarted = true;
+        if (isVisible && isStarted){
+            initLayoutComponent();
+        }
     }
 
     @Override
@@ -153,8 +160,7 @@ public class VisitorListFragment extends Fragment {
         super.onResume();
         Log.d(LOG_TAG ," inside onResume ");
         BusProvider.getInstance().register(this);
-
-    }
+           }
 
     private void initLayoutComponent() {
         appDBHelper= new AppDBHelper(getContext());
@@ -191,12 +197,14 @@ public class VisitorListFragment extends Fragment {
     public void onPause() {
         super.onPause();
         Log.d(LOG_TAG ," inside  onPause ");
+        isStarted=false;
         BusProvider.getInstance().unregister(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        isStarted=false;
         Log.d(LOG_TAG ," inside  onStop ");
     }
 
@@ -289,7 +297,7 @@ public class VisitorListFragment extends Fragment {
                         JSONObject mJsonObject = visitorArr.getJSONObject(i);
                         String visitorName=mJsonObject.getString("visitorName");
                         String contactNumber=mJsonObject.getString("contactNumber");
-                        Visitor visitor= new Visitor(visitorName,patientName,patientId,contactNumber,true);
+                        Visitor visitor= new Visitor(visitorName,patientId,contactNumber,true);
                         visitorList.add(visitor);
                     }
 
@@ -376,14 +384,26 @@ public class VisitorListFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            // animate here
-            Log.d(LOG_TAG, "isVisibleToUser: "+ isVisibleToUser);
+        Log.d(LOG_TAG, "isVisibleToUser: "+ isVisibleToUser);
+        isVisible = isVisibleToUser;
+        if (isStarted && isVisible) {
             initLayoutComponent();
         }else{
             Log.d(LOG_TAG, "fragment is no longer visible");
             // fragment is no longer visible
         }
+//        if (isVisibleToUser) {
+//            if (getView() != null) {
+//                isViewShown = true;
+//                initLayoutComponent();
+//            } else {
+//                isViewShown = false;
+//            }
+//
+//        }else{
+//            Log.d(LOG_TAG, "fragment is no longer visible");
+//            // fragment is no longer visible
+//        }
     }
 
 

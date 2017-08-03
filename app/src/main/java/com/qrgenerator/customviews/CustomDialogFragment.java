@@ -94,7 +94,7 @@ public class CustomDialogFragment extends DialogFragment {
     void submitButtonClick() {
         final Visitor visitor = new Visitor();
         visitor.setPatientId(patientId.getText().toString());
-        visitor.setPatientName(patientName.getText().toString());
+//        visitor.setPatientName(patientName.getText().toString());
         visitor.setVisitorMobileNo(visitorMobileNo.getText().toString());
         visitor.setVisitorName(visitorName.getText().toString());
 
@@ -167,11 +167,12 @@ public class CustomDialogFragment extends DialogFragment {
                     AppDBHelper appDBHelper = new AppDBHelper(getContext());
                     ItemTable itemTable = new ItemTable(appDBHelper);
                     itemTable.insert(visitor);
-                    String serverURL = "http://demo-ramnath.rhcloud.com/qrLinkSent.do";
-                    new LongOperation2().execute(serverURL,patientId.getText().toString(),visitorMobileNo.getText().toString());
+//                    String serverURL = "http://demo-ramnath.rhcloud.com/qrLinkSent.do";
+//                    new LongOperation2().execute(serverURL,patientId.getText().toString(),visitorMobileNo.getText().toString());
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                     getDialog().dismiss();
                 }else{
+                    getDialog().dismiss();
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                 }
             }

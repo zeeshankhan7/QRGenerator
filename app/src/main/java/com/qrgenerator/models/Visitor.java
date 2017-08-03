@@ -9,15 +9,15 @@ public class Visitor {
 
     private String visitorName;
 
-    public String getPatientName() {
-        return patientName;
-    }
+//    public String getPatientName() {
+//        return patientName;
+//    }
+//
+//    public void setPatientName(String patientName) {
+//        this.patientName = patientName;
+//    }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    private String patientName;
+//    private String patientName;
 //    private String visitorAddress;
     private String visitorMobileNo;
 
@@ -33,11 +33,11 @@ public class Visitor {
     public Visitor() {
 
     }
-    public Visitor(String visitorName, String patientName,String patientId, String visitorContactNo, boolean isAllowed) {
+    public Visitor(String visitorName,String patientId, String visitorContactNo, boolean isAllowed) {
         this.visitorName = visitorName;
         this.patientId = patientId;
         this.visitorMobileNo = visitorContactNo;
-        this.patientName=patientName;
+//        this.patientName=patientName;
         this.isAllowed = isAllowed;
     }
 
