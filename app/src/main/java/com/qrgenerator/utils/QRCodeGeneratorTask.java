@@ -3,6 +3,7 @@ package com.qrgenerator.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -10,6 +11,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.qrgeneratorapp.max.R;
 import com.qrgenerator.models.Attendant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by inmkhan021 on 7/11/2017.
@@ -28,9 +32,17 @@ public class QRCodeGeneratorTask extends AsyncTask<Attendant, Integer , Bitmap> 
     @Override
     protected Bitmap doInBackground(Attendant... params) {
         BitMatrix bitMatrix=null;
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("mobile",params[0].getAttendentContactNo());
+            jsonObject.put("id",params[0].getPatientId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("Irshad", " NORMAL JSON string "+ jsonObject.toString());
         try {
             bitMatrix = new MultiFormatWriter().encode(
-                    params[0].toString(),
+                    jsonObject.toString(),
                     BarcodeFormat.DATA_MATRIX.QR_CODE,
                     QRcodeWidth, QRcodeWidth, null
             );

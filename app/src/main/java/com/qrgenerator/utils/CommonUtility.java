@@ -1,11 +1,13 @@
 package com.qrgenerator.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.Visitor;
 
@@ -26,6 +28,13 @@ public class CommonUtility {
         } else {
             return false;
         }
+    }
+    public static String getJsonString(Object object){
+        String json="";
+        Gson gson = new Gson();
+        json = gson.toJson(object);
+        return json;
+
     }
     public static boolean isValidUserModel(Attendant attendant) {
         boolean isValidUserModel= true;
