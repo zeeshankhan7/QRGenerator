@@ -46,7 +46,7 @@ public class ItemTable implements ITable {
         ContentValues contentValue = new ContentValues();
         contentValue.put(COL_VISITOR_NAME, model.getVisitorName());
         contentValue.put(COL_PATIENT_ID, model.getPatientId());
-        contentValue.put(COL_PATIENT_NAME, model.getPatientName());
+//        contentValue.put(COL_PATIENT_NAME, model.getPatientName());
         contentValue.put(COL_VISITOR_MOBILE_NO, model.getVisitorMobileNo());
         contentValue.put(COL_IS_VISITOR_ALLOWED, model.isAllowed());
         database.insert(TABLE_NAME, null, contentValue);
@@ -106,7 +106,7 @@ public class ItemTable implements ITable {
                 String visitorMobileNo = cursor.getString(cursor.getColumnIndex(COL_VISITOR_MOBILE_NO));
                 Visitor visitor = new Visitor();
                 visitor.setVisitorName(visitorName);
-                visitor.setPatientName(patientName);
+//                visitor.setPatientName(patientName);
                 visitor.setPatientId(patientID);
                 visitor.setVisitorMobileNo(visitorMobileNo);
                 data.add(visitor);

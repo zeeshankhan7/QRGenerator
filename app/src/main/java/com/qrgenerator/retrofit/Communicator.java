@@ -1,5 +1,7 @@
 package com.qrgenerator.retrofit;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -7,6 +9,7 @@ import com.qrgenerator.Events.ErrorEvent;
 import com.qrgenerator.Events.ServerEvent;
 import com.qrgenerator.models.AddVisitorParams;
 import com.qrgenerator.models.AddVisitorResponse;
+import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.GetVisitorParams;
 import com.qrgenerator.models.Visitor;
 import com.qrgenerator.models.VisitorListResponse;
@@ -53,6 +56,37 @@ public class Communicator {
         });
     }
 
+    public void loginAttendant(Context ctx, final Attendant attendant){
+
+        final ProgressDialog progressDialog = new ProgressDialog(ctx);
+        progressDialog.setMessage("Login....");
+        progressDialog.setCancelable(false);
+        // show it
+        progressDialog.show();
+        ApiInterface apiService= ApiClient.getClient().create(ApiInterface.class);
+        Call<AddVisitorResponse> call= apiService.loginAttendant(Constants.CONTENT_TYPE,attendant);
+        call.enqueue(new Callback<AddVisitorResponse>() {
+            @Override
+            public void onResponse(Call<AddVisitorResponse> call, Response<AddVisitorResponse> response) {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                if(response.isSuccessful()){
+                    BusProvider.getInstance().post(produceServerEvent(response.body()));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AddVisitorResponse> call, Throwable t) {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                BusProvider.getInstance().post(produceErrorEvent(-2,t.getMessage()));
+
+            }
+        });
+    }
     public void getVisitorListFromServer(GetVisitorParams patientId){
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);

@@ -1,18 +1,15 @@
 package com.qrgenerator.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.qrgenerator.models.Attendant;
 import com.qrgenerator.models.Visitor;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by inmkhan021 on 7/12/2017.
@@ -32,6 +29,13 @@ public class CommonUtility {
             return false;
         }
     }
+    public static String getJsonString(Object object){
+        String json="";
+        Gson gson = new Gson();
+        json = gson.toJson(object);
+        return json;
+
+    }
     public static boolean isValidUserModel(Attendant attendant) {
         boolean isValidUserModel= true;
 //        if (attendant.getVisitorOrAttendantName() == null || attendant.getVisitorOrAttendantName().equals("") || attendant.getVisitorOrAttendantName().equals("NULL")) {
@@ -41,7 +45,7 @@ public class CommonUtility {
 //        }else
         if(attendant.getPatientId() == null || attendant.getPatientId().equals("") || attendant.getPatientId().equals("NULL")) {
             isValidUserModel=false;
-        }else if(attendant.getVisitorOrAttendantMobileNo() == null || attendant.getVisitorOrAttendantMobileNo().equals("") || attendant.getVisitorOrAttendantMobileNo().equals("NULL")) {
+        }else if(attendant.getAttendentContactNo() == null || attendant.getAttendentContactNo().equals("") || attendant.getAttendentContactNo().equals("NULL")) {
             isValidUserModel=false;
         }
         return isValidUserModel;
@@ -64,9 +68,11 @@ public class CommonUtility {
         boolean isValidVisitorModel= true;
         if (visitor.getVisitorName() == null || visitor.getVisitorName().equals("") || visitor.getVisitorName().equals("NULL")) {
             isValidVisitorModel=false;
-        } else if(visitor.getPatientName() == null || visitor.getPatientName().equals("") || visitor.getPatientName().equals("NULL")) {
-            isValidVisitorModel=false;
-        }else if(visitor.getPatientId() == null || visitor.getPatientId().equals("") || visitor.getPatientId().equals("NULL")) {
+        }
+//        else if(visitor.getPatientName() == null || visitor.getPatientName().equals("") || visitor.getPatientName().equals("NULL")) {
+//            isValidVisitorModel=false;
+//        }
+        else if(visitor.getPatientId() == null || visitor.getPatientId().equals("") || visitor.getPatientId().equals("NULL")) {
             isValidVisitorModel=false;
         }else if(visitor.getVisitorMobileNo() == null || visitor.getVisitorMobileNo().equals("") || visitor.getVisitorMobileNo().equals("NULL")) {
             isValidVisitorModel=false;
