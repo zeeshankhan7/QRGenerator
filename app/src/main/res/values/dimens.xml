@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="underline_width">2dp</dimen>
     <dimen name="form_container_padding">15dp</dimen>
-    <dimen name="form_card_elevation">10dp</dimen>
+    <dimen name="form_card_elevation">5dp</dimen>
     <dimen name="heading_font_size">20sp</dimen>
     <dimen name="heading_font_size_less_one">18sp</dimen>
 </resources>
