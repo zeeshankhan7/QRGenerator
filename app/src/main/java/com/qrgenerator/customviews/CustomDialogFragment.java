@@ -28,6 +28,7 @@ import com.qrgenerator.retrofit.ApiClient;
 import com.qrgenerator.retrofit.ApiInterface;
 import com.qrgenerator.retrofit.BusProvider;
 import com.qrgenerator.retrofit.Communicator;
+import com.qrgenerator.utils.AppSharedPreferenceHelper;
 import com.qrgenerator.utils.CommonUtility;
 import com.qrgenerator.utils.Constants;
 import com.qrgenerator.utils.NetworkCallUtil;
@@ -117,6 +118,9 @@ public class CustomDialogFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.visitor_form, container,false);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         unbinder = ButterKnife.bind(this, rootView);
+        String patientIdValue= AppSharedPreferenceHelper.getInstance(getContext()).getPatientIDFromSP();
+        patientId.setText(patientIdValue);
+        patientId.setEnabled(false);
         // Do something else
         return rootView;
     }

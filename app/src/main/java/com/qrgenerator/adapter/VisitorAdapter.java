@@ -37,7 +37,7 @@ public class VisitorAdapter extends RecyclerView.Adapter<VisitorAdapter.VisitorV
     public void onBindViewHolder(VisitorViewHolder holder, int position) {
         Visitor visitor= visitorList.get(position);
         holder.visitorName.setText( visitor.getVisitorName());
-//        holder.visitorAdrress.setText(visitor.getVisitorAddress());
+        holder.visitorAdrress.setText(visitor.getPatientId());
         holder.visitorContactNo.setText(visitor.getVisitorMobileNo());
 
     }

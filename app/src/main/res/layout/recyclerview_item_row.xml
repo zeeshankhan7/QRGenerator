@@ -12,32 +12,72 @@
         android:layout_width="match_parent"
 
         style="@style/LoginFormCardStyle"
-        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardBackgroundColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:layout_margin="1dp"
             >
             <com.qrgenerator.customviews.CustomFontUnderlineTextView
                 android:id="@+id/patient_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_alignParentLeft="true"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:textSize="25sp"
+                android:layout_marginBottom="3dp"
                 android:layout_gravity="center_horizontal"
-                app:custom_font="signika_semi_bold"
+                app:custom_font="signika_regular"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
                 android:text="Visitor Card"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.qrgenerator.customviews.CustomFontTextView
+                    android:id="@+id/visitor_address_title"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:drawableLeft="@drawable/ic_patientid"
+                    android:drawablePadding="3dp"
+                    android:textSize="18sp"
+                    app:custom_font="signika_light"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="16dp"
+                    android:text="Patient Id:"/>
+                <com.qrgenerator.customviews.CustomFontTextView
+                    android:id="@+id/visitor_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/cardtextcolor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="16dp"
+                    android:text="Sector 62 Noida"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="1dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.qrgenerator.customviews.CustomFontTextView
                     android:id="@+id/visitor_name_title"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:drawableLeft="@drawable/ic_name"
+                    android:drawablePadding="3dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/colorPrimaryDark"
@@ -51,48 +91,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/cardtextcolor"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_marginRight="16dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="Visitor Name"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_height="1dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.qrgenerator.customviews.CustomFontTextView
-                    android:id="@+id/visitor_address_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    app:custom_font="signika_light"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="16dp"
-                    android:text="Visitor Address:"/>
-                <com.qrgenerator.customviews.CustomFontTextView
-                    android:id="@+id/visitor_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="16dp"
-                    android:text="Sector 62 Noida"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content">
                 <com.qrgenerator.customviews.CustomFontTextView
                     android:id="@+id/visitor_contact_no_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/colorPrimaryDark"
+                    android:drawableLeft="@drawable/ic_contact"
+                    android:drawablePadding="3dp"
                     android:textSize="18sp"
                     app:custom_font="signika_light"
                     android:layout_alignParentTop="true"
@@ -103,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/cardtextcolor"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
@@ -112,6 +138,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <com.qrgenerator.customviews.CustomFontTextView
                     android:id="@+id/status_title"
