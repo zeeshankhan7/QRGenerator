@@ -31,10 +31,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Communicator {
     private static  final String LOG_TAG = Communicator.class.getSimpleName();
 
-    public void addVisitorToServer(AddVisitorParams addVisitorParams, final Visitor visitor){
+    public void addVisitorToServer(Context ctx,AddVisitorParams addVisitorParams, final Visitor visitor){
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-
+        final ProgressDialog progressDialog = new ProgressDialog(ctx);
+        progressDialog.setMessage("Adding Visitor....");
+        progressDialog.setCancelable(false);
+        // show it
+        progressDialog.show();
         Call<AddVisitorResponse> call = apiService.addVisitor(Constants.CONTENT_TYPE, addVisitorParams);
 
         call.enqueue(new Callback<AddVisitorResponse>() {
@@ -42,6 +46,9 @@ public class Communicator {
             public void onResponse(Call<AddVisitorResponse> call, Response<AddVisitorResponse> response) {
                 // response.isSuccessful() is true if the response code is 2xx
                 //produceServerEvent(response.body(),visitor
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 if(response.isSuccessful()){
                     BusProvider.getInstance().post(produceServerEvent(response.body(),visitor));
                 }
@@ -51,6 +58,9 @@ public class Communicator {
             @Override
             public void onFailure(Call<AddVisitorResponse> call, Throwable t) {
                 // handle execution failures like no internet connectivity
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 BusProvider.getInstance().post(produceErrorEvent(-2,t.getMessage()));
             }
         });
