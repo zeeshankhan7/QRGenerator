@@ -1,5 +1,6 @@
 package com.qrgenerator.customviews;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -65,7 +66,7 @@ public class CustomDialogFragment extends DialogFragment {
 
     private static final String LOG_TAG= CustomDialogFragment.class.getSimpleName();
 
-
+private ProgressDialog mProgressDialog;
     @BindView(R.id.visitor_name_editTxt)
     CustomFontEditText visitorName;
     @BindView(R.id.visitor_mobile_no_editTxt)
@@ -99,6 +100,8 @@ public class CustomDialogFragment extends DialogFragment {
         visitor.setVisitorName(visitorName.getText().toString());
 
         if(CommonUtility.isValidVisitorModel(visitor)) {
+            mProgressDialog=new ProgressDialog(getContext());
+            mProgressDialog.show();
             Communicator communicator = new Communicator();
             AddVisitorParams params= new AddVisitorParams(visitor.getVisitorName(),visitor.getVisitorMobileNo(),visitor.getPatientId());
             communicator.addVisitorToServer(params,visitor);
@@ -171,8 +174,10 @@ public class CustomDialogFragment extends DialogFragment {
 //                    new LongOperation2().execute(serverURL,patientId.getText().toString(),visitorMobileNo.getText().toString());
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
                     getDialog().dismiss();
+                    mProgressDialog.dismiss();
                 }else{
                     CommonUtility.showSnackBar(activity_main1, responseMsg);
+                    mProgressDialog.dismiss();
                 }
             }
         }
@@ -182,6 +187,7 @@ public class CustomDialogFragment extends DialogFragment {
     @Subscribe
     public void onErrorEvent(ErrorEvent errorEvent){
         CommonUtility.showSnackBar(activity_main1, errorEvent.getErrorMsg());
+        mProgressDialog.dismiss();
     }
 
     private class LongOperation2  extends AsyncTask<String, Void, Void>{
